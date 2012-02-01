@@ -239,7 +239,7 @@
 	 * attendOpenMicButtonClick
 	 */
 	function attendOpenMicButtonClick() {
-		$("#attendopenmicButton").append(" <img src='/images/spinner.gif' width='13px' height='13px' />");
+		$("#attendopenmicButton").html("<img src='/images/spinner.gif' width='13px' height='13px' /> Wait...");
 		if($("#attendopenmicButton").attr("attend_type") == "attend"){
 			attendOpenMic();
 		}	
