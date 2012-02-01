@@ -73,6 +73,11 @@
 		$("#updateprofileButton").tap(function(e, info){
 			updateProfile($(e.target).attr("user_id"));
 		});
+		
+		/* Feedback */
+		$("#sendFeedbackButton").tap(function(e, info) {
+			sendFeedback();
+		});
 	});
 
 </script>
@@ -81,5 +86,6 @@
 <%= render 'iphone/open_mics' %>
 <%= render 'iphone/profile' %>
 <%= render 'iphone/utilities' %>
+<%= render 'iphone/feedback' %>
 
 

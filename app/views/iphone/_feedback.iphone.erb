@@ -1,0 +1,32 @@
+<script type='text/javascript'>
+	/*
+	 * loadProfile
+	 */
+	function sendFeedback() {
+		
+		$("#sendFeedbackButton").html("<img src='/images/spinner.gif' width='13px' height='13px' /> Sending...");
+		
+		$.ajax({
+			url: '/feedback',
+			type: "POST",
+			dataType: 'json',
+			data: { email_address : $("#feedback_email").val(), message : $("#feedback_message").val() },
+			success: function(data, textStatus, jqXHR) {
+				if(data.response == 'true') {
+					alert("Feedback Sent! Thank you");
+					$("#feedback_email").val("");
+					$("#feedback_message").val("");
+				}
+				else {
+					alert("error");
+				}
+				$("#sendFeedbackButton").html("Send");
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not send feedback.");
+			}
+		});
+		
+		
+	}
+</script>

@@ -9,6 +9,16 @@ class PagesController < ApplicationController
                                   params[:email_address],
                                   params[:message]).deliver
       @success = true
+      
+      respond_to do |format|
+        format.html
+        format.json { render :json => '{ "response" : "true" }' }
+      end
+    else
+      respond_to do |format|
+        format.html
+        format.json { render :json => '{ "response" : "false" }' }
+      end
     end  
   end
 
