@@ -1,0 +1,115 @@
+<h1>
+	<%= @open_mic.name %>
+	<% if admin? %>
+		| <%= link_to "edit", edit_open_mic_path(@open_mic) %>
+		| <%= link_to 'delete', @open_mic, 
+						:method => :delete, 
+						:confirm => "Are you sure you want to delete #{@open_mic.name}?", 
+						:title => "Delete Open Mic?" %>
+	<% end %>
+</h1>
+
+<!-- Date and Time -->
+<div class="infosection">
+	<%= @open_mic.day_of_week.pluralize() %><br/>
+	<% if !@open_mic.start_time.nil? %>
+		Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
+	<% end %>
+	<% if !@open_mic.end_time.nil? %>
+		End Time: <%= @open_mic.end_time.strftime("%I:%M%p") %>
+	<% end %>
+</div>
+
+<% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
+	<p>
+		<h2>Official Home Page</h2>
+		<div class="infosection">
+			<%= link_to @open_mic.url, @open_mic.url, :target => "_blank" %>
+		</div>
+	</p>
+<% end %>
+
+<!-- Address and Contact -->
+<% if !@open_mic.address_blank? %>
+<h2>Address</h2>
+<div class="infosection">
+	<table class="address">
+		<tr>
+			<td>
+				<%= @open_mic.street_1 %><br/>
+				<%= @open_mic.street_2 %><br/>
+				<%= @open_mic.city %><br/>
+				<%= @open_mic.prov_state %><br/>
+				<%= @open_mic.postal_zip %><br/>
+				<%= @open_mic.country %><br/>
+			</td>
+			
+			<!-- Load Google Map -->
+			<% if !@gmaps_address.nil? %>
+				<td class='map'>
+					<div class="map_container">				
+						<div id="map_canvas"></div>
+					</div>
+				</td>
+			
+				  
+  				<!-- Google Maps Javascript API -->
+  				<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBMjyuTMeohBkUOJa_9cTsG-Mr10045jwM&sensor=false">
+				</script>
+			
+				<script type="text/javascript">
+				
+					/* Initialize Map */									
+    				var latlng = new google.maps.LatLng(-34.397, 150.644);
+    				var myOptions = {
+      					zoom: 15,
+      					center: latlng,
+      					mapTypeId: google.maps.MapTypeId.ROADMAP
+    				};
+   					var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				
+					/* Geocode Address */
+					geocoder = new google.maps.Geocoder();
+					geocoder.geocode( { 'address': '<%= @gmaps_address %>'}, function(results, status) {
+      					if (status == google.maps.GeocoderStatus.OK) {
+        					map.setCenter(results[0].geometry.location);
+        					var marker = new google.maps.Marker({
+            					map: map, 
+            					position: results[0].geometry.location
+        					});
+      					} 
+    				});
+					
+
+  				</script>
+			<% end %>	
+			
+		</tr>
+	</table>
+</div>
+<% end %>
+
+<% if signed_in? %>
+	<% if @open_mic.users.include?(current_user) %>
+		<%= link_to 'Click Here to Unattend', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
+	<% else %>
+		<%= link_to 'Click Here to Attend', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
+	<% end %>
+	
+	
+	<!-- Attendees -->
+	<% if !@open_mic.users.empty? %>
+		<h2>Attendees</h2>
+		<div class="infosection">		
+			<ul>
+				<% @open_mic.users.each do |attendee| %>
+					<li><%= attendee.first_name + ' ' + attendee.last_name %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+<% else %>
+	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
+<% end %>
+
+

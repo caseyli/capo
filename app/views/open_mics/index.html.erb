@@ -1,0 +1,93 @@
+<table class='weektable'>
+	<tr>
+		<td class='leftcol'><h2>sunday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_sunday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr >
+		<td class='leftcol'><h2>monday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_monday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class='leftcol'><h2>tuesday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_tuesday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class='leftcol'><h2>wednesday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_wednesday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class='leftcol'><h2>thursday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_thursday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class='leftcol'><h2>friday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_friday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class='leftcol'><h2>saturday</h2></td>
+		<td>
+			<ul class="bodylist">
+				<% @open_mics_saturday.each do |open_mic| %>
+					<li>
+						<%= link_to open_mic.name, open_mic %>
+					</li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	
+</table>

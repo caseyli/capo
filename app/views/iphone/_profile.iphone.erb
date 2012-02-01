@@ -1,0 +1,63 @@
+<script type='text/javascript'>
+	/*
+	 * loadProfile
+	 */
+	function loadProfile() {
+		$.ajax({
+			url: '/users/show_me',
+			dataType: 'json',
+			success: function(data, textStatus, jqXHR) {
+				if(data != null) {
+					ihtml = "<br/>";
+					ihtml += "<div class='infosection'>";
+					ihtml += data.user.first_name + " " + data.user.last_name;
+					ihtml += "<br/>" + data.user.email;
+					ihtml += "</div>";
+					$("#profile_body").html(ihtml);
+					
+					/* Load Form */
+					$("#edit_user_email").val(data.user.email);
+					$("#edit_user_first_name").val(data.user.first_name);
+					$("#edit_user_last_name").val(data.user.last_name);
+					$("#updateprofileButton").attr("user_id", data.user.id);
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not load profile.");
+			}
+		});
+	}
+	
+	/*
+	 * updateProfile
+	 */
+	function updateProfile(user_id) {
+		$.ajax({
+			url: '/users/ajax_update',
+			dataType: 'json',
+			type: 'POST',
+			data: { id: user_id, user : { 
+						email : $("#edit_user_email").val(),
+						first_name : $("#edit_user_first_name").val(), 
+						last_name : $("#edit_user_last_name").val(),
+						password : $("#edit_user_password").val(),
+						password_confirmation : $("#edit_user_password_confirmation").val(), 
+					}
+				 },
+			success: function(data, textStatus, jqXHR) {
+				if(data.response == "true") {
+					alert("Profile Successfully updated!");
+					loadProfile();
+					jQT.goBack("profile", "slidedown", "slidedown");
+				}
+				else {
+					alert(data.message);
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not update profile. Error: " + jqXHR.status);
+			}
+		});
+	}
+
+</script>

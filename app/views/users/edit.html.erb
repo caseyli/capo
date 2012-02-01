@@ -1,0 +1,16 @@
+<h1>Edit Profile</h1>
+
+<%= form_for @user do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.label :email %><br/>
+	<%= f.text_field :email %><br/>
+	<%= f.label :first_name %><br/>
+	<%= f.text_field :first_name %><br/>
+	<%= f.label :last_name %><br/>
+	<%= f.text_field :last_name %><br/>
+	<%= f.label :password %><br/>
+	<%= f.password_field :password %><br/>
+	<%= f.label :password_confirmation %><br/>
+	<%= f.password_field :password_confirmation %><br/>
+	<%= f.submit %>
+<% end %>

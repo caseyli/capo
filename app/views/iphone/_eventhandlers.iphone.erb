@@ -1,0 +1,85 @@
+<script type="text/javascript">
+	/* EVENT HANDLERS *****************************************************************************/
+	$(function() {
+		
+		/* STARTUP */
+		checkLoggedIn();
+
+		/* EVENT HANDLER INITIALIZATION */
+		/* Sessions */
+		$("#loginButton").tap(function(e, info) {
+			login();
+		});
+		
+		$("#registerButton").tap(function(e, info){
+			register();
+		});
+		
+		$("#logoffButton").tap(function(e, info) {
+			if (confirm("Are you sure you want to logoff?")) {
+				logoff();	
+			}
+		});
+		
+		$("#toolbarlogoffButton").tap(function(e, info) {
+			logoff();
+		});
+		
+		
+		/* Open Mics */
+		$("#browse").bind('pageAnimationStart', function(event, info) {
+			if(info.direction == 'in') {
+				$("#homeloggedin").mask("Loading...");
+				loadOpenMics();
+			}
+		});
+		
+		$("#browse").bind('pageAnimationEnd', function(event, info) {
+			if(info.direction == 'in') {
+				$("#homeloggedin").unmask();
+			}
+		});
+		
+		$("#openmicLink").tap(function(e, info) {
+			$("#browse").mask("Loading..");
+			loadOpenMicInfo($(e.target).attr("open_mic_id"));
+		});
+		
+		$("#openmicinfo").bind('pageAnimationEnd', function(event, info){
+			if(info.direction == 'in')
+				$("#browse").unmask();
+		});
+		
+		$("#viewmapLink").tap(function(e, info) {
+			loadOpenMicMap($(e.target).attr("gmaps_address"));
+		});
+		
+		
+		$("#attendopenmicButton").tap(function(e, info){
+			attendOpenMicButtonClick();
+		});
+
+		$("#attendeelistButton").tap(function(e, info){
+			loadOpenMicAttendeeList();
+		});
+		
+		
+		/* Profile */
+		$("#profile").bind('pageAnimationStart', function(event, info){
+			if(info.direction == 'in')
+				loadProfile();
+		});
+		
+		$("#updateprofileButton").tap(function(e, info){
+			updateProfile($(e.target).attr("user_id"));
+		});
+	});
+
+</script>
+
+<%= render 'iphone/sessions' %>
+<%= render 'iphone/open_mics' %>
+<%= render 'iphone/profile' %>
+<%= render 'iphone/utilities' %>
+
+

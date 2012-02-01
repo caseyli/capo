@@ -1,0 +1,39 @@
+<% unless @hideheader%>
+<header>
+	<%= link_to logo, root_path %>
+	<br/>
+	<nav class="round">
+		<ul>
+			<li>
+				<%= link_to "Home", "/main/home" %>
+			</li>
+			<li>
+				<%= link_to "Browse", "/open_mics" %>
+			</li>
+			<li>
+				<%= link_to "About", "/pages/about" %>
+			</li>
+			<% if signed_in? %>
+				<% if admin? %>
+					<li>
+						<%= link_to "New Open Mic", :controller => "open_mics", :action => "new" %>
+					</li>
+					<li>
+						<%= link_to "Users", users_path %>
+					</li>
+				<% end %>
+				<li>
+					<%= link_to 'Profile', current_user %>
+				</li>
+				<li>
+					<%= link_to "Sign out", signout_path %>
+				</li>
+			<% else %>
+				<li>
+					<%= link_to "Sign in", signin_path %>
+				</li>
+			<% end %>
+		</ul>
+	</nav>
+</header>
+<% end %> 

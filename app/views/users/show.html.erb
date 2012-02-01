@@ -1,0 +1,17 @@
+<h1>
+	<%= @user.first_name + " " + @user.last_name %>
+	
+	<% if admin? %>
+		| <%= link_to "delete", @user, :method => :delete, :confirm => "You sure?",
+		                            :title => "Delete #{@user.first_name}" %>
+	<% end %>
+</h1>
+<div class="infosection">
+	<h2>Attending:</h2>
+	<ul>
+		<% @user.open_mics.each do |open_mic| %>
+			<li><%= open_mic.name %></li>
+		<% end %>
+	</ul>
+</div>
+<%= link_to "Edit Profile", edit_user_path(current_user) %>

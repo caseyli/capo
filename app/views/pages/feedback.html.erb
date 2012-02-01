@@ -1,0 +1,18 @@
+<h1>Feedback</h1>
+<% if !@success %>
+	<%= form_tag "/feedback" do %>
+		<div class="field">
+			<%= label_tag :email_address, "Your E-Mail Address" %><br/>
+			<%= text_field_tag :email_address, nil, :size => "30" %><br/>
+		</div>
+		<div class="field">
+			<%= label_tag :message, "Message" %><br/>
+			<%= text_area_tag :message, nil, :cols => 95, :rows => 10 %><br/>
+		</div>
+		<div class="actions">
+			<%= submit_tag "Submit" %>
+		</div>
+	<% end %>
+<% else %>
+	<%= label_tag :success_message, "Your message has been sent." %>
+<% end %>

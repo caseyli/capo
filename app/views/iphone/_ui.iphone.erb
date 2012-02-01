@@ -1,0 +1,171 @@
+<!-- HOME -->
+<div id="home">
+	<div class="toolbar">
+		<h1>Capo</h1>
+	</div>
+            
+	<br />
+	<div class="blockcenter">
+		<%= image_tag "iphonemain.png" %>
+	</div>
+	<ul class="rounded">
+		<li class="arrow"><a href="#browse" id="homebrowselink">Browse</a></li>
+		<li><a href="#login" class="slideup">Login</a></li>
+		<li><a href="#about" class="pop">About</a></li>
+	</ul>
+</div>
+
+<!-- HOME LOGGED IN -->
+<div id="homeloggedin">
+	<div class="toolbar">
+		<h1>Capo</h1>
+		<a class="button" id="toolbarlogoffButton" href="#">Logoff</a>
+	</div>
+    
+	<div class="blockcenter topimage">
+		<%= image_tag "iphoneshort.png" %>
+	</div>
+
+	<ul class="rounded">
+		<li class="arrow"><a href="#browse">Browse</a></li>
+		<li><a href="#profile">Profile</a></li>
+		<li><a href="#" id="logoffButton">Logoff</a></li>
+		<li><a href="#about" class="pop">About</a></li>
+	</ul>	
+</div>
+        
+<!-- BROWSE -->
+<div id="browse">
+	<div class="toolbar">
+		<h1>Browse</h1>
+		<a class="button back" href="#">Back</a>
+	</div>
+            
+     <div id="browse_body">
+     </div>
+</div>
+
+<!-- OPEN MIC INFO -->
+<div id="openmicinfo">
+	<div class="toolbar">
+		<h1>Info</h1>
+		<a class="button back" href="#">Back</a>
+	</div>
+	
+	<div id="openmicinfo_body">
+	</div>
+</div>
+
+<!-- Map -->
+<div id="openmicmap">
+	<div class="toolbar">
+		<h1>Map</h1>
+		<a class="button back" href="#">Done</a>
+	</div>
+	
+	<div id="openmicmap_body">
+		<div id="mapcontainer">
+			<div id="mapcanvas"></div>
+		</div>
+		<div id="mapcaption">
+		</div>
+	</div>
+</div>
+
+<!-- OPEN MIC ATTENDEE LIST -->
+<div id="openmicattendeelist">
+	<div class="toolbar">
+		<h1>Attendee List</h1>
+		<a class="button back" href="#">Done</a>
+	</div>
+	<ul id="openmicattendeelist_body" class="rounded">
+	</ul>
+</div>
+        
+<!-- LOGIN -->
+<div id="login">
+	<div class="toolbar">
+		<h1>Login</h1>
+		<a class="button back" href="#">Back</a>
+	</div>
+	<form>
+		<ul class="edit rounded">
+			<li><input type='text' name='login_email' id='login_email' placeholder='e-mail' autocapitalize="off" autocorrect="off" autocomplete="off"></li>
+			<li><input type='password' name='login_password', id='login_password', placeholder='password'></li>
+			
+		</ul>
+		<a href="#" class='grayButton' id='loginButton'>Login</a>
+	</form>
+	
+	<div class="blockcenter">
+		<br/>
+		New User? Register <a href="#register" class="pop">here</a>
+	</div>
+</div>
+
+<!-- REGISTER -->
+<div id="register">
+	<div class="toolbar">
+		<h1>Register</h1>
+		<a class="button back" href="#">Cancel</a>
+	</div>
+	<form>
+		<ul class="edit rounded">
+			<li><input type='text' name='reg_first_name' id='reg_first_name' placeholder='first name' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='reg_last_name' id='reg_last_name' placeholder='last name' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='reg_email' id='reg_email' placeholder='e-mail' autocapitalize="off" autocorrect="off" autocomplete="off"></li>
+			<li><input type='password' name='reg_password', id='reg_password', placeholder='password'></li>
+			<li><input type='password' name='reg_confirmation', id='reg_confirmation', placeholder='confirm password'></li>
+			
+		</ul>
+		<a href="#" class='grayButton' id='registerButton'>Register</a>
+	</form>
+</div>
+
+<!-- PROFILE -->
+<div id="profile">
+	<div class="toolbar">
+		<h1>Profile</h1>
+		<a class="button back" href="#">Cancel</a>
+	</div>
+	<div id="profile_body">
+	</div>
+	<div id="profile_actions" class='actions'>
+		<a class='grayButton slideup' href='#editprofile' id='editprofileButton'>Edit</a>
+	</div>
+</div>
+<div id="editprofile">
+	<div class="toolbar">
+		<h1>Edit Profile</h1>
+		<a class="button back" href="#">Cancel</a>
+	</div>
+	<form>
+		<ul class="edit rounded">
+			<li><input type='text' name='edit_user_email' id='edit_user_email' placeholder='email' autocapitalize="off" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='edit_user_first_name' id='edit_user_first_name' placeholder='first name' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='edit_user_last_name' id='edit_user_last_name' placeholder='last name' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='password' name='edit_user_password', id='edit_user_password', placeholder='password'></li>
+			<li><input type='password' name='edit_user_password_confirmation', id='edit_user_password_confirmation', placeholder='confirm password'></li>
+		
+		</ul>
+		<a href="#" class='grayButton' id='updateprofileButton'>Update</a>
+	</form>
+</div>
+        
+<!-- ABOUT -->
+<div id="about">
+	<div class="toolbar">
+		<h1>About</h1>
+		<a class="button back" href="#">Back</a>
+	</div>
+	<br/>
+	<div class="infosection">
+		<p>Capo (pronounced 'kay-po') is an Open Mic Community Tool.</p>
+		<br />
+		<p>Powered by Ruby on Rails and JQTouch</p>
+		<br />
+		<p>Developed by Casey Li</p>
+		<br />
+		<p><a href="http://www.caseyli.com" target="_blank">www.caseyli.com</a></p>
+	</div>
+</div>

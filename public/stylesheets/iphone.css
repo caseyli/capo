@@ -1,0 +1,46 @@
+.blockcenter {
+	display: block;	
+	text-align: center;
+}
+
+.topimage {
+	padding-top: 10px;
+}
+
+.infosection {
+	border-radius: 10px;
+	border: 1px solid;
+	border-color: #303030;
+	width: 85%;
+	margin: 0px auto 10px;
+	padding: 5px 15px 5px 15px;
+	color: #C0C0C0;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#303030));
+}
+
+.infosection a {
+	color: #ffffff;
+	text-decoration: none;
+	
+}
+
+/* Google Maps */
+#openmic_body {
+	text-align: center;
+}
+
+#mapcaption {
+	padding: 10px;
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#mapcontainer {
+	padding: 10px 10px 10px 10px;
+}
+
+#mapcanvas {
+	width: 300px;
+	height: 300px;
+}

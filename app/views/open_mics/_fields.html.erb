@@ -1,0 +1,56 @@
+<div class="field">
+	<%= f.label :name %>
+	<br />
+	<%= f.text_field :name %>
+</div>
+<%= render 'shared/error_messages', :object => f.object %>
+<div class="field">
+	<%= f.label :day_of_week %>
+	<br />
+	<%= f.select :day_of_week, [['Sunday', 'Sunday'], ['Monday', 'Monday'], ['Tuesday', 'Tuesday'], ['Wednesday', 'Wednesday'], ['Thursday', 'Thursday'], ['Friday', 'Friday'], ['Saturday', 'Saturday']] %>
+</div>
+<div class="field">
+	<%= f.label :start_time %>
+	<br />
+	<%= f.text_field :start_time %>
+</div>
+<div class="field">
+	<%= f.label :end_time %>
+	<br />
+	<%= f.text_field :end_time %>
+</div>
+<div class="field">
+	<%= f.label :street_1 %>
+	<br />
+	<%= f.text_field :street_1 %>
+</div>
+<div class="field">
+	<%= f.label :street_2 %>
+	<br />
+	<%= f.text_field :street_2 %>
+</div>
+<div class="field">
+	<%= f.label :city %>
+	<br />
+	<%= f.text_field :city %>
+</div>
+<div class="field">
+	<%= f.label :prov_state %>
+	<br />
+	<%= f.text_field :prov_state %>
+</div>
+<div class="field">
+	<%= f.label :postal_zip %>
+	<br />
+	<%= f.text_field :postal_zip %>
+</div>
+<div class="field">
+	<%= f.label :country %>
+	<br />
+	<%= f.text_field :country %>
+</div>
+<div class="field">
+	<%= f.label :url %>
+	<br />
+	<%= f.text_field :url %>
+</div>

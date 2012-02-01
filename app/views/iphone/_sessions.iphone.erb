@@ -1,0 +1,96 @@
+<script type="text/javascript">
+	/*
+	 * checkLoggedIn
+	 */
+	function checkLoggedIn() {
+		$("#home").mask("Loading...");
+		$.ajax({
+			url : "/sessions/signed_in",
+			dataType : "json",
+			success : function(data, textStatus, jqXHR) {
+				if (data.response == "true") {
+					jQT.goTo("#homeloggedin", "dissolve", "dissolve");
+				}
+			}
+		});
+		$("#home").unmask(); 
+	}
+
+	/*
+	 * login
+	 */
+	function login() {
+		$.ajax({
+			type: "POST",
+			url: "/sessions",
+			dataType : "json",
+			data: { session : { email : $("#login_email").val().trim(), password : $("#login_password").val().trim() } },
+			success : function(data, textStatus, jqXHR) {
+				if (data.response == "true") {
+					jQT.goTo("#homeloggedin", "slidedown", "slidedown");
+					$("#login_password").val("");	
+				}
+				else {
+					alert(data.message);
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Error! " + jqXHR.status);
+			}
+		});
+	}
+	
+	/*
+	 * register
+	 */
+	function register() {
+		$.ajax({
+			type: "POST",
+			url: "/users",
+			dataType : "json",
+			data: { user : { first_name : $("#reg_first_name").val(),
+			                 last_name : $("#reg_last_name").val(),
+							 email : $("#reg_email").val(), 
+							 password : $("#reg_password").val(),
+							 password_confirmation : $("#reg_password_confirmation").val() 
+							} 
+				  },
+			success : function(data, textStatus, jqXHR) {
+				if (data.response == "true") {
+					/* Note, the creation of the user on the server side automatically logs them in */
+					alert("Registration Successful!");
+					jQT.goTo("#homeloggedin", "slidedown", "slidedown");
+				}
+				else {
+					alert(data.message);
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Error! " + jqXHR.status);
+			}
+		});
+	}
+	
+	/*
+	 * logoff
+	 */
+	function logoff() {
+		$.ajax({
+			type: "POST",
+			url: "/signout",
+			dataType: "json",
+			success: function(data, textStatus, jqXHR) {
+				if (data.response == "true") {
+					jQT.goTo("#home", "dissolve", "dissolve");
+				}
+				else {
+					alert("Sorry, there was trouble signing out.");
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				
+			}
+		});
+	}
+	
+</script>

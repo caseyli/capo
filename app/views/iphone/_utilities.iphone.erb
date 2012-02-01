@@ -1,0 +1,25 @@
+<script type='text/javascript'>	
+	/*
+	 * timeHours
+	 * takes in YYYY-MM-DDTHH:mm:ssZ and extracts HH:mm
+	 */
+	function timeHoursMins(utcString) {
+		if (utcString == null) {
+			return "unknown";
+		}
+		else {
+			var hours = utcString.substring(11, 13);
+			var mins = utcString.substring(14, 16);
+			var ampm = "AM";
+			if (hours > 12) {
+				hours = hours - 12;
+				if(hours < 10) {
+					hours = "0" + hours;
+				}
+				ampm = "PM";
+			}
+			return hours + ":" + mins + " " + ampm;
+		}
+	}
+
+</script>

@@ -1,0 +1,331 @@
+<!-- Google Maps Javascript API -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBMjyuTMeohBkUOJa_9cTsG-Mr10045jwM&sensor=false">
+</script>
+
+<script type="text/javascript">
+
+	/* 
+	 * loadOpenMics()
+	 * Makes AJAX call to get a collection of open mics and populate the browse_body element.
+	 */
+	function loadOpenMics() {
+		$.ajax({
+			url : "/open_mics/",
+			dataType : "json",
+			success : function(data, textStatus, jqXHR) {
+				var sunday_list = "";
+				var monday_list = "";
+				var tuesday_list = "";
+				var wednesday_list = "";
+				var thursday_list = "";
+				var friday_list = "";
+				var saturday_list = "";
+				var ihtml = "";
+				jQuery.each(data, function() {
+					ihtml = "<li class='arrow'><a href='#' id='openmicLink' open_mic_id='" + this.open_mic.id + "'>" + this.open_mic.name + "</a></li>"
+					switch (this.open_mic.day_of_week) {
+						case "Sunday":
+							sunday_list += ihtml;
+							break;
+						case "Monday":
+							monday_list += ihtml;
+							break;
+						case "Tuesday":
+							tuesday_list += ihtml;
+							break;
+						case "Wednesday":
+							wednesday_list += ihtml;
+							break;
+						case "Thursday":
+							thursday_list += ihtml;
+							break;
+						case "Friday":
+							friday_list += ihtml;
+							break;
+						case "Saturday":
+							saturday_list += ihtml;
+							break;
+
+					}
+					ihtml = "<ul class='edgetoedge'>";
+					ihtml += "<li class='sep'>sunday</li>" + sunday_list;
+					ihtml += "<li class='sep'>monday</li>" + monday_list;
+					ihtml += "<li class='sep'>tuesday</li>" + tuesday_list;
+					ihtml += "<li class='sep'>wednesday</li>" + wednesday_list;
+					ihtml += "<li class='sep'>thursday</li>" + thursday_list;
+					ihtml += "<li class='sep'>friday</li>" + friday_list;
+					ihtml += "<li class='sep'>saturday</li>" + saturday_list;
+					ihtml += "</ul>";
+				});
+				$("#browse_body").html(ihtml);
+				
+				/* Clear Buttons to avoid flicker when entering another open mic info */
+				$("#openmicinfo_actions").html(ihtml);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Error: " + jqXHR.status);
+			}
+		});
+	}
+
+	/* 
+	 * loadOpenMicsInfo
+	 * Makes AJAX call to grab all the info about the passed in open_mic_id and populates the openmicinfo_body element
+	 */
+	function loadOpenMicInfo(open_mic_id) {
+		$.ajax({
+			url: "/open_mics/" + open_mic_id,
+			dataType: "json",
+			success: function(data, textStatus, jqXHR){
+				var o = data.open_mic;
+				var ihtml = "<div class='infoback'>";
+				
+				ihtml += "<h1 id='openmicname'>" + o.name + "</h1>";
+				
+				/* Time and Day */
+				ihtml += "<div class='infosection'>";
+				ihtml += "<p>";
+				ihtml +=  o.day_of_week + "s<br/>";		
+				ihtml += "Start Time: " + timeHoursMins(o.start_time) + "<br/>";
+				ihtml += "End Time: " + timeHoursMins(o.end_time) + "<br/>";
+				ihtml += "</p>";
+				ihtml += "</div>";
+				
+				/* Address */
+				ihtml += "<p><h2>Address</h2>";
+				
+				ihtml += "<div class='infosection'>";
+				if(o.street_1 == null) {
+					ihtml += "Unknown";
+				}
+				else {
+					ihtml += o.street_1
+					if (o.street_2 != null && o.street_2 != "") {
+						ihtml += ", " + o.street_2;
+					}
+					ihtml += "<br/>";
+					ihtml += o.city + "<br/>";
+					ihtml += o.prov_state + "<br/>";
+				}
+				ihtml += "</p>";
+				
+				/* Map */
+				if(o.street_1 != "" && o.street_1 != null) {
+					var gmaps_address = o.street_1;
+					if (o.street_2 != "") {
+						gmaps_address += " " + o.street_2;
+					}
+					if (o.city != "") {
+						gmaps_address += ", " + o.city;
+					}
+					if (o.prov_state != "") {
+						gmaps_address += ", " + o.prov_state;
+					}
+					
+					ihtml += "<p><a id='viewmapLink' href='#' gmaps_address='" + gmaps_address + "'>View Map</a></p>";
+				}
+				ihtml += "</div>";
+
+				/* Home Page */
+				if (o.url != null && o.url != "") {
+					ihtml += "<p><h2>Official Home Page</h2>";
+					ihtml += "<div class='infosection'>"
+					ihtml += "<a href='" + o.url + "' target='_blank'>" + o.url + "</a>";
+					ihtml += "</p>";
+					ihtml += "</div>";
+				}
+
+				ihtml += "</div>";
+				
+				$("#openmicinfo_body").html(ihtml);
+				
+				/* Show/Hide Actions */
+				$.ajax({
+					url : "/sessions/signed_in",
+					dataType : "json",
+					success : function(data, textStatus, jqXHR) {
+						var ihtml = "";
+						if (data.response == "true") {
+							
+							$.ajax({
+								url : "/open_mics/attending_info",
+								dataType : "json",
+								data: { id : o.id },
+								success : function(data, textStatus, jqXHR) {
+									
+									ihtml += '<div class="actions">';
+									
+									/* Render Attend/Unattend Button */
+									ihtml += '<div id="attendButton">';
+									ihtml += '<a id="attendopenmicButton" attend_type="';
+									
+									var label = "";
+									if (data.attending == "true") {
+										ihtml += 'unattend';
+										label = "Unattend";
+										color = "redButton";
+									}
+									else {
+										ihtml += 'attend';
+										label = "Attend";
+										color = "greenButton";
+									}
+									ihtml +='" open_mic_id="' + o.id + '" href="#" class="' + color + '">' + label + '</a>';
+									ihtml += '</div>';
+									ihtml += '<br/>';
+									
+									/* Render Attendee List Button */
+									ihtml += '<a class="grayButton" id="attendeelistButton" open_mic_id="' + o.id + '" href="#">Attendees (' + data.attendee_count + ')</a>';
+									
+									ihtml += '</div>';
+									
+									$("#openmicinfo_body").append(ihtml);
+								},
+								error : function(jqXHR, textStatus, errorThorwn) {
+									alert("Error: " + jqXHR.status)
+								}
+							}); /* AJAX Call attending info */	
+						}
+						else {
+							ihtml += '<a class="grayButton slideup" href="#login">Sign in</a>'
+							$("#openmicinfo_body").append(ihtml);
+						}
+					}
+				}); /* Ajax Call signed in */
+			
+				
+				jQT.goTo("#openmicinfo", "slideleft", "slideright");
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Error: " + jqXHR.status);
+			}
+		});
+	}
+	
+	/*
+	 * loadOpenMicMap
+	 */
+	function loadOpenMicMap(gmaps_address) {
+		   	
+		/* Have to navigate first or you get Google Map Rendering issues */
+		jQT.goTo("#openmicmap", "flipleft", "flipleft");
+
+		/* Initialize Google Map */									    	
+    	var myOptions = {
+      		zoom: 15,
+      		mapTypeId: google.maps.MapTypeId.ROADMAP
+    	};
+   		var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+   		
+		/* Geocode Address */
+		geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': gmaps_address }, function(results, status) {
+      		if (status == google.maps.GeocoderStatus.OK) {
+        		map.setCenter(results[0].geometry.location);
+        		var marker = new google.maps.Marker({
+            		map: map, 
+            		position: results[0].geometry.location
+        		});
+      		} 
+    	});
+    	
+    	$("#mapcaption").html($("#openmicname").html() + "<br/>" + gmaps_address);
+ 
+		
+    	
+	}
+
+	/*
+	 * attendOpenMicButtonClick
+	 */
+	function attendOpenMicButtonClick() {
+		$("#attendopenmicButton").append(" <img src='/images/spinner.gif' width='13px' height='13px' />");
+		if($("#attendopenmicButton").attr("attend_type") == "attend"){
+			attendOpenMic();
+		}	
+		else {
+			unattendOpenMic();
+		}
+	}
+	
+	/*
+	 * attendOpenMic
+	 */
+	function attendOpenMic(){
+		$.ajax({
+			url: '/open_mics/attend',
+			dataType: 'json',
+			data: { id : $("#attendopenmicButton").attr("open_mic_id")},
+			success: function(data, textStatus, jqXHR) {
+				if(data.response == "true") {
+					alert("Thanks for attending!");	
+					$("#attendopenmicButton").html("Unattend");
+					$("#attendopenmicButton").attr("attend_type","unattend");
+					$("#attendopenmicButton").attr("class","redButton");
+					$("#attendeelistButton").html("Attendees (" + data.attendee_count +")");
+				}
+				else {
+					alert(data.message);
+				}
+					
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not update.");
+			}
+		});
+	}
+	
+	/*
+	 * unattendOpenMic
+	 */
+	function unattendOpenMic(){
+		$.ajax({
+			url: '/open_mics/unattend',
+			dataType: 'json',
+			data: { id : $("#attendopenmicButton").attr("open_mic_id")},
+			success: function(data, textStatus, jqXHR) {
+				alert("You have been removed from the attendees list.");
+				$("#attendopenmicButton").html("Attend");
+				$("#attendopenmicButton").attr("attend_type","attend");
+				$("#attendopenmicButton").attr("class","greenButton");
+				$("#attendeelistButton").html("Attendees (" + data.attendee_count +")");
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Error: " + jqXHR.status);
+			}
+		});
+	}
+	
+	/*
+	 * loadOpenMicAttendeeList
+	 */
+	function loadOpenMicAttendeeList() {
+		var attendeelistButtonLabel = $("#attendeelistButton").html();
+		$("#attendeelistButton").append(" <img src='/images/spinner.gif' width='13px' height='13px' />");
+		
+		$.ajax({
+			url: '/open_mics/attendee_list',
+			dataType: 'json',
+			data: { id : $("#attendeelistButton").attr("open_mic_id")},
+			success: function(data, textStatus, jqXHR) {
+				var ihtml = "";
+				if (data.length == 0) {
+					ihtml += "<li>(None)</li>";
+				}
+				jQuery.each(data, function() {
+					ihtml += "<li>" + this.user.first_name + " " + this.user.last_name + "</li>";
+				});
+				
+				$("#openmicattendeelist_body").html(ihtml);
+				$("#attendeelistButton").html(attendeelistButtonLabel);
+				jQT.goTo("#openmicattendeelist", "pop", "pop");
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not update.");
+			}
+		});
+		
+	}
+	
+
+</script>

@@ -1,0 +1,20 @@
+#postgres database
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: capo
+  pool: 5
+  username: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432
+  
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: capo
+  pool: 5
+  username: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432
