@@ -1,3 +1,14 @@
+/* For non-HTML 5 Browsers */
+header
+,nav
+,section
+,article
+,aside
+,footer
+,hgroup { 
+	display: block;
+}
+
 /* General */
 
 body {
