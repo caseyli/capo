@@ -18,6 +18,9 @@ body {
 	 /* for IE */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006185', endColorstr='#00214a');
 	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #006185,  #00214a);
+	
 	color: #eeeeee;
 	font-size:75%;
 	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -55,6 +58,13 @@ a:hover {
 		color-stop(0.13, #000000),
 		color-stop(0.57, #00364a)
 	);
+	
+	 /* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#00364a');
+	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #000000,  #00364a);
+	
 	box-shadow: 10px 10px 5px #222;
 }
 
@@ -68,6 +78,7 @@ a:hover {
 	border-bottom-right-radius: 20px;
 	
 	padding: 10px 10px 10px 10px;
+	
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
@@ -75,6 +86,14 @@ a:hover {
 		color-stop(0.13, #ffffff),
 		color-stop(0.57, #aaaaaa)
 	);
+	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #ffffff,  #aaaaaa);
+	
+	 /* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#aaaaaa');
+	
+	
 	box-shadow: 10px 10px 5px #222;
 	color: #222222;
 }
@@ -263,6 +282,12 @@ nav ul li a:hover {
 	padding: 5px 15px 5px 15px;
 	color: #fff;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#303030));
+	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #000,  #303030);
+	
+	/* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000', endColorstr='#303030');
 }
 
 .infosection a {
@@ -289,13 +314,28 @@ ul.bodylist li a {
 	margin: 5px auto 5px 0;
 	text-decoration: none;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#001d41));
+	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #000,  #001d41);
+	
+	/* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#001d41');
+	
 	display: block;
 	width: 100%;
 }
 
 ul.bodylist li a:hover {
 	text-decoration: none;
+	
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#001d41));
+	
+	/* Firefox */
+	background: -moz-linear-gradient(top,  #fff,  #001d41);
+	
+	/* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#001d41');
+	
 	display: block;
 }
 
