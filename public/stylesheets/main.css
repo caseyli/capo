@@ -24,6 +24,10 @@ body {
 	min-height: 2000px;
 }
 
+a img {
+	border: none;
+}
+
 .main a {
 	text-decoration: underline;
 	color: #eeeeee;
