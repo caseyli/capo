@@ -11,7 +11,7 @@ task :reset_attendees => :environment do
       yesterday = Date::DAYNAMES[Time.now.wday-1]
     end
     
-    OpenMic.find_all_by_day_of_week(yesterday) do |open_mic|
+    OpenMic.find_all_by_day_of_week("Tuesday").each do |open_mic|
       open_mic.remove_all_attendees
     end
     

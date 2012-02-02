@@ -6,3 +6,7 @@
 <p>
 	We always welcome lots of feedback. Please send us your thoughts and suggestions <%= link_to "here", "/feedback" %>.
 </p>
+
+<% OpenMic.find_all_by_day_of_week("Tuesday").each do |open_mic| %>
+     <%= open_mic.name %>
+   <% end%>
