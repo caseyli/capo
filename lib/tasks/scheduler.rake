@@ -1,5 +1,5 @@
 desc "This task is called by the Heroku scheduler add-on"
-task :reset_attendees do
+task :reset_attendees => :environment do
   
     # Clear Attendees Day After Open Mic
     
