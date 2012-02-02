@@ -15,6 +15,9 @@ body {
 	background-image: -webkit-gradient(
 		radial, 500 25%, 20, 500 25%, 800, from(#006185), to(#00214a)
 	);
+	 /* for IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006185', endColorstr='#00214a');
+	
 	color: #eeeeee;
 	font-size:75%;
 	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
