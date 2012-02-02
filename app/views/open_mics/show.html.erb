@@ -90,11 +90,7 @@
 <% end %>
 
 <% if signed_in? %>
-	<% if @open_mic.users.include?(current_user) %>
-		<%= link_to 'Click Here to Unattend', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
-	<% else %>
-		<%= link_to 'Click Here to Attend', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
-	<% end %>
+	
 	
 	
 	<!-- Attendees -->
@@ -107,7 +103,17 @@
 				<% end %>
 			</ul>
 		</div>
+		
 	<% end %>
+	
+	<% if @open_mic.users.include?(current_user) %>
+		<%= link_to 'Click Here to Not Attend This Week', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
+	<% else %>
+		<%= link_to 'Click Here to Attend This Week', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
+	<% end %>
+	<br/>
+	<br/>
+	Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
 <% else %>
 	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
 <% end %>
