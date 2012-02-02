@@ -23,6 +23,10 @@ class OpenMic < ActiveRecord::Base
     update
   end
   
+  def remove_all_attendees
+    users.delete_all
+  end
+  
   def address_blank?
     (street_1.nil? || street_1.strip == "") &&
     (street_2.nil? || street_2.strip == "") &&
