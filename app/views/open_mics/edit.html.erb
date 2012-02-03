@@ -2,7 +2,15 @@
 
 <%= form_for(@open_mic) do |f| %>
 	<%= render 'fields', :f => f %>
+	
+	<div class="field">
+		<%= f.label :published %>
+		<br />
+		<%= f.check_box :published %>
+	</div>
+	
 	<div class="actions">
 		<%= f.submit "Update" %>
 	</div>
+	
 <% end %>

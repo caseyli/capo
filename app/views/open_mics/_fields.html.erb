@@ -10,12 +10,12 @@
 	<%= f.select :day_of_week, [['Sunday', 'Sunday'], ['Monday', 'Monday'], ['Tuesday', 'Tuesday'], ['Wednesday', 'Wednesday'], ['Thursday', 'Thursday'], ['Friday', 'Friday'], ['Saturday', 'Saturday']] %>
 </div>
 <div class="field">
-	<%= f.label :start_time %>
+	<%= f.label :start_time %> (examples '09:00' or '23:00')
 	<br />
 	<%= f.text_field :start_time %>
 </div>
 <div class="field">
-	<%= f.label :end_time %>
+	<%= f.label :end_time %> (examples: '9:00' or '23:00')
 	<br />
 	<%= f.text_field :end_time %>
 </div>

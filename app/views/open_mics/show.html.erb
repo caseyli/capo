@@ -1,3 +1,4 @@
+<% if @open_mic.published %>
 <h1>
 	<%= @open_mic.name %>
 	<% if admin? %>
@@ -118,4 +119,15 @@
 	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
 <% end %>
 
+<% else %>
+	<h1>Open Mic Coming Soon!</h1>
+	<p>This page contains Open Mic Information that is awaiting approval.</p>
+	<% if admin? %>
+		<%= link_to "publish", edit_open_mic_path(@open_mic) %> 
+		| <%= link_to 'delete', @open_mic, 
+						:method => :delete, 
+						:confirm => "Are you sure you want to delete #{@open_mic.name}?", 
+						:title => "Delete Open Mic?" %>
+	<% end %>
+<% end%>
 

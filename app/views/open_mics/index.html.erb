@@ -6,6 +6,9 @@
 				<% @open_mics_sunday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>
@@ -19,7 +22,11 @@
 				<% @open_mics_monday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
+					
 				<% end %>
 			</ul>
 		</td>
@@ -32,6 +39,9 @@
 				<% @open_mics_tuesday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>
@@ -45,6 +55,9 @@
 				<% @open_mics_wednesday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>
@@ -58,6 +71,9 @@
 				<% @open_mics_thursday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>
@@ -71,6 +87,9 @@
 				<% @open_mics_friday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>
@@ -84,6 +103,9 @@
 				<% @open_mics_saturday.each do |open_mic| %>
 					<li>
 						<%= link_to open_mic.name, open_mic %>
+						<% if !open_mic.published %>
+							not published
+						<% end %>
 					</li>
 				<% end %>
 			</ul>

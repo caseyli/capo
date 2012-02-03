@@ -9,9 +9,12 @@ class OpenMic < ActiveRecord::Base
                   :prov_state,
                   :postal_zip, 
                   :country,
-                  :url
+                  :url,
+                  :published
                   
   has_and_belongs_to_many :users
+  
+  scope :published, where(:published => true)
   
   def add_attendee(user)
     users << user

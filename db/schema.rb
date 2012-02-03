@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111204083015) do
+ActiveRecord::Schema.define(:version => 20120203042836) do
 
   create_table "open_mics", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20111204083015) do
     t.string   "postal_zip"
     t.string   "country"
     t.string   "url"
+    t.boolean  "published"
   end
 
   create_table "open_mics_users", :id => false, :force => true do |t|

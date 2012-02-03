@@ -1,6 +1,6 @@
 class OpenMicsController < ApplicationController
   
-  before_filter :deny_access_for_non_admins, :only => [:new, :create, :edit, :destroy]
+  before_filter :deny_access_for_non_admins, :only => [:edit, :destroy]
   before_filter :authenticate              , :only => [:attend, :unattend]
   
   def new
@@ -11,7 +11,7 @@ class OpenMicsController < ApplicationController
   def create
     @open_mic = OpenMic.new(params[:open_mic])
     if @open_mic.save
-      flash[:success] = "Open Mic Created!"
+      flash[:success] = "Thank you for submitting your Open Mic. Once it is approved it will show up in list!"
       redirect_to @open_mic
     else
       @title = "Create New Open Mic"
@@ -30,15 +30,27 @@ class OpenMicsController < ApplicationController
   end
   
   def index
-    @open_mics = OpenMic.all
+    # this Code needs to be heavily optimized for performance
     
-    @open_mics_sunday = OpenMic.find_all_by_day_of_week("Sunday")
-    @open_mics_monday = OpenMic.find_all_by_day_of_week("Monday")
-    @open_mics_tuesday = OpenMic.find_all_by_day_of_week("Tuesday")
-    @open_mics_wednesday = OpenMic.find_all_by_day_of_week("Wednesday")
-    @open_mics_thursday = OpenMic.find_all_by_day_of_week("Thursday")
-    @open_mics_friday = OpenMic.find_all_by_day_of_week("Friday")
-    @open_mics_saturday = OpenMic.find_all_by_day_of_week("Saturday")
+    @open_mics = OpenMic.all
+
+    if admin?
+      @open_mics_sunday = OpenMic.find_all_by_day_of_week("Sunday")
+      @open_mics_monday = OpenMic.find_all_by_day_of_week("Monday")
+      @open_mics_tuesday = OpenMic.find_all_by_day_of_week("Tuesday")
+      @open_mics_wednesday = OpenMic.find_all_by_day_of_week("Wednesday")
+      @open_mics_thursday = OpenMic.find_all_by_day_of_week("Thursday")
+      @open_mics_friday = OpenMic.find_all_by_day_of_week("Friday")
+      @open_mics_saturday = OpenMic.find_all_by_day_of_week("Saturday")
+    else
+      @open_mics_sunday = OpenMic.published.find_all_by_day_of_week("Sunday")
+      @open_mics_monday = OpenMic.published.find_all_by_day_of_week("Monday")
+      @open_mics_tuesday = OpenMic.published.find_all_by_day_of_week("Tuesday")
+      @open_mics_wednesday = OpenMic.published.find_all_by_day_of_week("Wednesday")
+      @open_mics_thursday = OpenMic.published.find_all_by_day_of_week("Thursday")
+      @open_mics_friday = OpenMic.published.find_all_by_day_of_week("Friday")
+      @open_mics_saturday = OpenMic.published.find_all_by_day_of_week("Saturday")
+    end
     
     respond_to do |format|
       format.html
