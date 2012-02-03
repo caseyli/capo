@@ -317,8 +317,8 @@
 				});
 				
 				$("#openmicattendeelist_body").html(ihtml);
-				$("#attendeelistButton").html(attendeelistButtonLabel);
 				jQT.goTo("#openmicattendeelist", "pop", "pop");
+				$("#attendeelistButton").html(attendeelistButtonLabel);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("Sorry, could not update.");
