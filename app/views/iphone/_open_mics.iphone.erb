@@ -301,7 +301,7 @@
 	 */
 	function loadOpenMicAttendeeList() {
 		var attendeelistButtonLabel = $("#attendeelistButton").html();
-		$("#attendeelistButton").append(" <img src='/images/spinner.gif' width='13px' height='13px' />");
+		$("#attendeelistButton").html("<img src='/images/spinner.gif' width='13px' height='13px' /> Loading...");
 		
 		$.ajax({
 			url: '/open_mics/attendee_list',
