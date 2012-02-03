@@ -32,7 +32,7 @@ class OpenMicsController < ApplicationController
   def index
     # this Code needs to be heavily optimized for performance
     
-    @open_mics = OpenMic.all
+    @open_mics = OpenMic.published.all
 
     if admin?
       @open_mics_sunday = OpenMic.find_all_by_day_of_week("Sunday")
