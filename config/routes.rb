@@ -19,7 +19,9 @@ Capo::Application.routes.draw do
   get "sessions/signed_in"
   
   resources :users
-  resources :open_mics
+  resources :open_mics do
+    resources :posts
+  end
   resources :sessions,            :only => [:new, :create, :destroy]
   resources :posts
   

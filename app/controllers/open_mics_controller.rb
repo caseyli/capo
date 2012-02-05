@@ -23,7 +23,7 @@ class OpenMicsController < ApplicationController
     @open_mic = OpenMic.find(params[:id])
     @gmaps_address = gmaps_address(@open_mic)
     
-    @post = Post.new if host?(@open_mic)
+    @post = Post.new if host?(@open_mic) || admin?
     
     respond_to do |format|
       format.html
