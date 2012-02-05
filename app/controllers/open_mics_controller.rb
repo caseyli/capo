@@ -25,7 +25,7 @@ class OpenMicsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render :json => @open_mic }
+      format.json { render :json => @open_mic.as_json(:include => :hosts) }
     end
   end
   
