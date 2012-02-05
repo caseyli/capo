@@ -24,8 +24,12 @@
 <!-- News -->
 <h2>News</h2>
 <div class="infosection">
-	<% @open_mic.posts.order(:updated_at).reverse_order.limit(5).each do |post| %>
-		<li><%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %></li>
+	<% if @open_mic.posts.empty? %>
+		<li> There is currently no news for this Open Mic.</li>
+	<% else %>
+		<% @open_mic.posts.order(:updated_at).reverse_order.limit(5).each do |post| %>
+			<li><%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %></li>
+		<% end %>
 	<% end %>
 </div>
 <%= link_to "View All News", open_mic_posts_url(@open_mic) %>

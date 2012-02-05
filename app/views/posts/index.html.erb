@@ -1,16 +1,20 @@
 <h1>All News for <%= @open_mic.name %></h1>
 
 <ul>
-	<% @open_mic.posts.order(:updated_at).reverse_order.each do |post| %>
-		<li>
-			<%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %> 
-			<% if host?(@open_mic) || admin? %>
-				| <%= link_to "delete", post, 
+	<% if @open_mic.posts.empty? %>
+		<li> There is currently no news for this Open Mic.</li>
+	<% else %>
+		<% @open_mic.posts.order(:updated_at).reverse_order.each do |post| %>
+			<li>
+				<%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %> 
+				<% if host?(@open_mic) || admin? %>
+					| <%= link_to "delete", post, 
 						:method => :delete, 
 						:confirm => "Are you sure you want to delete #{post.body}?", 
 						:title => "Delete Post?" %>
-			<% end %>
-		</li>
+				<% end %>
+			</li>
+		<% end %>
 	<% end %>
 </ul>
 
