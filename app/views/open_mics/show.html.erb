@@ -30,6 +30,31 @@
 	</p>
 <% end %>
 
+<!-- Hosts -->
+<% if !@open_mic.hosts.empty? %>
+	<h2>Host</h2>
+	<div class="infosection">
+		<ul>
+			<% @open_mic.hosts.each do |host| %>
+				<li>
+					<%= host.full_name %>
+					<% if admin? %>
+					| <%= link_to "remove", :controller => "open_mics", :action => "remove_host", :method => :post, :host_to_remove => host, :id => @open_mic %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+<% if admin? %>
+	<%= form_tag("/open_mics/add_host", :method => "post") do %>
+  		<%= label_tag(:host_to_add, "Add Host:") %>
+  		<%= collection_select :host_to_add, :id, User.all, :id, :full_name %>
+  		<%= hidden_field_tag(:id, @open_mic.id)%>
+  		<%= submit_tag("Add") %>
+	<% end %>
+<% end %>
+
 <!-- Address and Contact -->
 <% if !@open_mic.address_blank? %>
 <h2>Address</h2>

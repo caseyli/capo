@@ -10,7 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203042836) do
+ActiveRecord::Schema.define(:version => 20120205005541) do
+
+  create_table "hosted_open_mics_hosts", :id => false, :force => true do |t|
+    t.integer "hosted_open_mic_id"
+    t.integer "host_id"
+  end
 
   create_table "open_mics", :force => true do |t|
     t.string   "name"

@@ -1,6 +1,6 @@
 class OpenMicsController < ApplicationController
   
-  before_filter :deny_access_for_non_admins, :only => [:edit, :destroy]
+  before_filter :deny_access_for_non_admins, :only => [:edit, :destroy, :add_host, :remove_host]
   before_filter :authenticate              , :only => [:attend, :unattend]
   
   def new
@@ -76,6 +76,21 @@ class OpenMicsController < ApplicationController
   def destroy
     OpenMic.find(params[:id]).destroy
     redirect_to open_mics_path
+  end
+  
+    
+  def add_host
+    user = User.find_by_id(params[:host_to_add][:id])
+    open_mic = OpenMic.find(params[:id])
+    open_mic.add_host(user)
+    redirect_to open_mic
+  end
+  
+  def remove_host
+    user = User.find_by_id(params[:host_to_remove])
+    open_mic = OpenMic.find(params[:id])
+    open_mic.remove_host(user)
+    redirect_to open_mic
   end
   
   def attend

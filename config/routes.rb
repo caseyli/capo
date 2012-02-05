@@ -10,6 +10,9 @@ Capo::Application.routes.draw do
   get "open_mics/attendee_list"
   get "open_mics/attending_info"
   
+  match "open_mics/add_host" => "open_mics#add_host"
+  match "open_mics/remove_host" => "open_mics#remove_host"
+  
   get "users/show_me"
   post "users/ajax_update"
 

@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   has_and_belongs_to_many :open_mics
+  has_and_belongs_to_many :hosted_open_mics, 
+                          :class_name => "OpenMic", :join_table => "hosted_open_mics_hosts",
+                          :foreign_key => "host_id",
+                          :association_foreign_key => "hosted_open_mic_id"
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
@@ -34,6 +38,10 @@ class User < ActiveRecord::Base
   def self.authenticate_with_salt(id, cookie_salt)
     user = User.find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
+  end
+  
+  def full_name
+    first_name + " " + last_name
   end
   
   private

@@ -13,6 +13,10 @@ class OpenMic < ActiveRecord::Base
                   :published
                   
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :hosts, :class_name => "User", 
+                          :join_table => "hosted_open_mics_hosts",
+                          :foreign_key => "hosted_open_mic_id",
+                          :association_foreign_key => "host_id"
   
   scope :published, where(:published => true)
   
@@ -28,6 +32,16 @@ class OpenMic < ActiveRecord::Base
   
   def remove_all_attendees
     users.delete_all
+  end
+  
+  def add_host(user)
+    hosts << user
+    update
+  end
+  
+  def remove_host(user)
+    hosts.delete(user)
+    update
   end
   
   def address_blank?
