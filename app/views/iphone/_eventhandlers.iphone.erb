@@ -41,7 +41,7 @@
 		});
 		
 		$("#openmicLink").tap(function(e, info) {
-			$("#browse").mask("Loading..");
+			$(e.target).html("<img src='/images/spinner.gif' width='13px' height='13px' /> " + $(e.target).html());
 			loadOpenMicInfo($(e.target).attr("open_mic_id"));
 		});
 		
