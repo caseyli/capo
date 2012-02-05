@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
                           :foreign_key => "host_id",
                           :association_foreign_key => "hosted_open_mic_id"
   
+  has_many :posts
+  
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end

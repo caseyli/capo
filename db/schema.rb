@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205005541) do
+ActiveRecord::Schema.define(:version => 20120205070718) do
 
   create_table "hosted_open_mics_hosts", :id => false, :force => true do |t|
     t.integer "hosted_open_mic_id"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20120205005541) do
   create_table "open_mics_users", :id => false, :force => true do |t|
     t.integer "open_mic_id"
     t.integer "user_id"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "open_mic_id"
   end
 
   create_table "users", :force => true do |t|

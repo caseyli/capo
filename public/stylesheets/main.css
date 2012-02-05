@@ -277,7 +277,7 @@ nav ul li a:hover {
 	border-radius: 10px;
 	border: 1px solid;
 	border-color: #A0A0A0;
-	width: 85%;
+	width:90%;
 	margin: 10px auto 10px 0; 
 	padding: 5px 15px 5px 15px;
 	color: #fff;
@@ -375,4 +375,11 @@ table.address tr td.map {
 #map_canvas {
 	width: 300px;
 	height: 250px;
+}
+
+/* posts */
+
+.post {
+	width: 90%;
+	height: 40px;
 }

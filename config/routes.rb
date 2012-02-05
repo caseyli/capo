@@ -1,5 +1,5 @@
 Capo::Application.routes.draw do
- 
+
   get "pages/about"
   get "sessions/new"
   get "main/home"
@@ -21,7 +21,8 @@ Capo::Application.routes.draw do
   resources :users
   resources :open_mics
   resources :sessions,            :only => [:new, :create, :destroy]
-
+  resources :posts
+  
   root :to => 'main#home'
 
   

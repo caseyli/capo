@@ -21,6 +21,30 @@
 	<% end %>
 </div>
 
+<!-- News -->
+<h2>News</h2>
+<div class="infosection">
+	<% @open_mic.posts.order(:updated_at).reverse_order.each do |post| %>
+		<li><%= post.updated_at.strftime("%B %d, %Y %r: ") + " " + post.body %></li>
+	<% end %>
+</div>
+
+<!-- Posts -->
+<% if host?(@open_mic) %>
+	<p>
+		<%= form_for @post do |f| %>
+  			<%= render 'shared/error_messages', :object => f.object %>
+  			<div class="field">
+    			<%= f.text_area :body, :class => "post", :placeholder => "You are the host of this open mic! Feel free to post some news here!" %>		
+    		</div>
+ 			<%= f.hidden_field :open_mic_id, :value => @open_mic.id %>
+  			<div class="actions">
+    			<%= f.submit "Publish News" %>
+  			</div>
+		<% end %>
+	</p>
+<% end %>
+
 <% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
 	<p>
 		<h2>Official Home Page</h2>
@@ -34,10 +58,15 @@
 <% if !@open_mic.hosts.empty? %>
 	<h2>Host</h2>
 	<div class="infosection">
+		<% if host?(@open_mic) %>
+			You are a host of this Open Mic!
+		<% end %>
 		<ul>
 			<% @open_mic.hosts.each do |host| %>
+				
 				<li>
 					<%= host.full_name %>
+					
 					<% if admin? %>
 					| <%= link_to "remove", :controller => "open_mics", :action => "remove_host", :method => :post, :host_to_remove => host, :id => @open_mic %>
 					<% end %>

@@ -18,6 +18,8 @@ class OpenMic < ActiveRecord::Base
                           :foreign_key => "hosted_open_mic_id",
                           :association_foreign_key => "host_id"
   
+  has_many :posts
+  
   scope :published, where(:published => true)
   
   def add_attendee(user)

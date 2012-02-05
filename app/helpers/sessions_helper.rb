@@ -56,6 +56,14 @@ module SessionsHelper
     end
   end
   
+  def host?(open_mic)
+    if self.current_user.nil?
+      false
+    else
+      open_mic.hosts.include?(self.current_user)
+    end
+  end
+  
   private
   
     def store_location
