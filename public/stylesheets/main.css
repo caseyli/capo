@@ -383,3 +383,21 @@ table.address tr td.map {
 	width: 90%;
 	height: 40px;
 }
+
+.switchtoiphone {
+	display:block;
+	text-align: center;
+	padding: 30px;
+	
+}
+
+.switchtoiphone a {
+	border-radius: 10px;
+	border: 1px solid;
+	border-color: #A0A0A0;
+	padding: 10px;
+	background: #444444;
+	color: white;
+	text-decoration:none;
+	margin: 10px;
+}

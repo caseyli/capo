@@ -20,6 +20,17 @@
 	We always welcome lots of feedback. Please send us your thoughts and suggestions <%= link_to "here", "/feedback" %>.
 </p>
 <hr>
+
+
+<% if is_iphone_request? %>
+	<div class="switchtoiphone">
+      <%= link_to "Switch To iPhone Site",
+          :controller => "browsers", 
+          :action => :mobile          
+          %>
+	</div>
+<% end %>
+
 <g:plusone annotation="inline"></g:plusone>
 <br/>
 <br/>

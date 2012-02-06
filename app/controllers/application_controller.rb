@@ -3,10 +3,15 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   before_filter :set_iphone_format
+  
+  helper_method :is_iphone_request?
     
   def set_iphone_format
-    if is_iphone_request?
-      request.format = :iphone
+    if is_iphone_request? or request.format.to_sym == :iphone
+        request.format = if cookies["browser"] == "desktop" 
+                         then :html 
+                         else :iphone 
+                         end
     end
     
     # Handle AJAX Calls
@@ -14,6 +19,7 @@ class ApplicationController < ActionController::Base
       request.format = :json
     end
   end
+
   
   def is_iphone_request?
       request.user_agent =~ /(iPhone)/

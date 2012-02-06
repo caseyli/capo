@@ -3,13 +3,12 @@ Capo::Application.routes.draw do
   get "pages/about"
   get "sessions/new"
   get "main/home"
-  
+    
   get "open_mics/index_day_of_week"
   get "open_mics/attend"
   get "open_mics/unattend"
   get "open_mics/attendee_list"
   get "open_mics/attending_info"
-  
   match "open_mics/add_host" => "open_mics#add_host"
   match "open_mics/remove_host" => "open_mics#remove_host"
   
@@ -27,11 +26,13 @@ Capo::Application.routes.draw do
   
   root :to => 'main#home'
 
-  
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/signup', :to => 'users#new'
   match '/feedback', :to => 'pages#feedback'
+  
+  match '/browsers/desktop', :to => 'browsers#desktop'
+  match '/browsers/mobile', :to => 'browsers#mobile'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
