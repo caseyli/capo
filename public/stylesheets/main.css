@@ -369,11 +369,11 @@ table.weektable tr td.leftcol {
 	width: 100%;
 }
 
-table.address tr td {
+table.generalinfo tr td {
 	vertical-align: top;
 }
 
-table.address tr td.map {
+table.generalinfo tr td.map {
 	text-align: center;
 }
 
