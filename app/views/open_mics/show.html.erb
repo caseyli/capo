@@ -10,17 +10,6 @@
 	<% end %>
 </h1>
 
-<!-- Date and Time -->
-<div class="infosection">
-	<%= @open_mic.day_of_week.pluralize() %><br/>
-	<% if !@open_mic.start_time.nil? %>
-		Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
-	<% end %>
-	<% if !@open_mic.end_time.nil? %>
-		End Time: <%= @open_mic.end_time.strftime("%I:%M%p") %>
-	<% end %>
-</div>
-
 <!-- News -->
 <h2>News</h2>
 <div class="infosection">
@@ -51,36 +40,80 @@
 	</p>
 <% end %>
 
-<% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
-	<p>
-		<h2>Official Home Page</h2>
-		<div class="infosection">
-			<%= link_to @open_mic.url, @open_mic.url, :target => "_blank" %>
+<h2>Attendees</h2>
+<% if signed_in? %>
+	
+	
+	
+	<!-- Attendees -->
+	<% if !@open_mic.users.empty? %>
+		
+		<div class="infosection">		
+			<ul>
+				<% @open_mic.users.each do |attendee| %>
+					<li><%= attendee.first_name + ' ' + attendee.last_name %></li>
+				<% end %>
+			</ul>
 		</div>
-	</p>
+		
+	<% end %>
+	
+	<% if @open_mic.users.include?(current_user) %>
+		<%= link_to 'Click Here to Not Attend This Week', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
+	<% else %>
+		<%= link_to 'Click Here to Attend This Week', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
+	<% end %>
+	<br/>
+	<br/>
+	Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
+<% else %>
+	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
 <% end %>
+<br/>
+<br/>
+<!-- Date and Time -->
+<h2>General Info</h2>
+<div class="infosection">
+	<h2>When</h2>
+	<%= @open_mic.day_of_week.pluralize() %><br/>
+	<% if !@open_mic.start_time.nil? %>
+		Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
+	<% end %>
+	<% if !@open_mic.end_time.nil? %>
+		End Time: <%= @open_mic.end_time.strftime("%I:%M%p") %>
+	<% end %>
+
+
+	<% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
+	<p>
+		<h2>Official Home Page</h2>	
+		<%= link_to @open_mic.url, @open_mic.url, :target => "_blank" %>
+	</p>
+	<% end %>
+
 
 <!-- Hosts -->
 <% if !@open_mic.hosts.empty? %>
 	<h2>Host</h2>
-	<div class="infosection">
+
 		<% if host?(@open_mic) %>
 			You are a host of this Open Mic!
 		<% end %>
-		<ul>
+		
 			<% @open_mic.hosts.each do |host| %>
 				
-				<li>
+
 					<%= host.full_name %>
 					
 					<% if admin? %>
 					| <%= link_to "remove", :controller => "open_mics", :action => "remove_host", :method => :post, :host_to_remove => host, :id => @open_mic %>
 					<% end %>
-				</li>
+				<br/>
 			<% end %>
-		</ul>
-	</div>
+		
+
 <% end %>
+
 <% if admin? %>
 	<%= form_tag("/open_mics/add_host", :method => "post") do %>
   		<%= label_tag(:host_to_add, "Add Host:") %>
@@ -93,15 +126,18 @@
 <!-- Address and Contact -->
 <% if !@open_mic.address_blank? %>
 <h2>Address</h2>
-<div class="infosection">
 	<table class="address">
 		<tr>
 			<td>
 				<%= @open_mic.street_1 %><br/>
-				<%= @open_mic.street_2 %><br/>
+				<% unless @open_mic.street_2.blank? %>
+					<%= @open_mic.street_2 %><br/>
+				<% end %>
 				<%= @open_mic.city %><br/>
 				<%= @open_mic.prov_state %><br/>
-				<%= @open_mic.postal_zip %><br/>
+				<% unless @open_mic.postal_zip.blank? %>
+					<%= @open_mic.postal_zip %><br/>
+				<% end %>
 				<%= @open_mic.country %><br/>
 			</td>
 			
@@ -150,34 +186,7 @@
 </div>
 <% end %>
 
-<% if signed_in? %>
-	
-	
-	
-	<!-- Attendees -->
-	<% if !@open_mic.users.empty? %>
-		<h2>Attendees</h2>
-		<div class="infosection">		
-			<ul>
-				<% @open_mic.users.each do |attendee| %>
-					<li><%= attendee.first_name + ' ' + attendee.last_name %></li>
-				<% end %>
-			</ul>
-		</div>
-		
-	<% end %>
-	
-	<% if @open_mic.users.include?(current_user) %>
-		<%= link_to 'Click Here to Not Attend This Week', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
-	<% else %>
-		<%= link_to 'Click Here to Attend This Week', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
-	<% end %>
-	<br/>
-	<br/>
-	Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
-<% else %>
-	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
-<% end %>
+
 
 <% else %>
 	<h1>Open Mic Coming Soon!</h1>

@@ -296,6 +296,16 @@ nav ul li a:hover {
 	
 }
 
+.infosection h2 {
+	color: #999999;
+	font-size: 1.2em;
+	margin-bottom: 0px;
+}
+
+.infosection p {
+	padding-bottom: 0px;
+}
+
 /* Lists */
 
 ul.bodylist {
