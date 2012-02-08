@@ -1,192 +1,184 @@
 <% if @open_mic.published %>
-<h1>
-	<%= @open_mic.name %>
-	<% if admin? %>
-		| <%= link_to "edit", edit_open_mic_path(@open_mic) %>
-		| <%= link_to 'delete', @open_mic, 
+	<h1>
+		<%= @open_mic.name %>
+		<% if admin? %>
+			| <%= link_to "edit", edit_open_mic_path(@open_mic) %>
+			| <%= link_to 'delete', @open_mic, 
 						:method => :delete, 
 						:confirm => "Are you sure you want to delete #{@open_mic.name}?", 
 						:title => "Delete Open Mic?" %>
-	<% end %>
-</h1>
-
-<!-- News -->
-<h2>News</h2>
-<div class="infosection">
-	<% if @open_mic.posts.empty? %>
-		<li> There is currently no news for this Open Mic.</li>
-	<% else %>
-		<% @open_mic.posts.order(:updated_at).reverse_order.limit(5).each do |post| %>
-			<li><%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %></li>
 		<% end %>
-	<% end %>
-</div>
-<%= link_to "View All News", open_mic_posts_url(@open_mic) %>
-<br/><br/>
+	</h1>
 
-<!-- Posts Form -->
-<% if host?(@open_mic) || admin? %>
-	<p>
-		<%= form_for @post do |f| %>
-  			<%= render 'shared/error_messages', :object => f.object %>
-  			<div class="field">
-    			<%= f.text_area :body, :class => "post", :placeholder => "You are the host of this open mic! Feel free to post some news here!" %>		
-    		</div>
- 			<%= f.hidden_field :open_mic_id, :value => @open_mic.id %>
-  			<div class="actions">
-    			<%= f.submit "Publish News" %>
-  			</div>
-		<% end %>
-	</p>
-<% end %>
-
-<h2>Attendees</h2>
-<% if signed_in? %>
-	
-	
-	
-	<!-- Attendees -->
-	<% if !@open_mic.users.empty? %>
-		
-		<div class="infosection">		
-			<ul>
-				<% @open_mic.users.each do |attendee| %>
-					<li><%= attendee.first_name + ' ' + attendee.last_name %></li>
-				<% end %>
-			</ul>
-		</div>
-		
-	<% end %>
-	
-	<% if @open_mic.users.include?(current_user) %>
-		<%= link_to 'Click Here to Not Attend This Week', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
-	<% else %>
-		<%= link_to 'Click Here to Attend This Week', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
-	<% end %>
-	<br/>
-	<br/>
-	Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
-<% else %>
-	<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
-<% end %>
-<br/>
-<br/>
-<!-- Date and Time -->
-<h2>General Info</h2>
-<div class="infosection">
-	<h2>When</h2>
-	<%= @open_mic.day_of_week.pluralize() %><br/>
-	<% if !@open_mic.start_time.nil? %>
-		Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
-	<% end %>
-	<% if !@open_mic.end_time.nil? %>
-		End Time: <%= @open_mic.end_time.strftime("%I:%M%p") %>
-	<% end %>
-
-
-	<% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
-	<p>
-		<h2>Official Home Page</h2>	
-		<%= link_to @open_mic.url, @open_mic.url, :target => "_blank" %>
-	</p>
-	<% end %>
-
-
-<!-- Hosts -->
-<% if !@open_mic.hosts.empty? %>
-	<h2>Host</h2>
-
-		<% if host?(@open_mic) %>
-			You are a host of this Open Mic!
-		<% end %>
-		
-			<% @open_mic.hosts.each do |host| %>
-				
-
-					<%= host.full_name %>
-					
-					<% if admin? %>
-					| <%= link_to "remove", :controller => "open_mics", :action => "remove_host", :method => :post, :host_to_remove => host, :id => @open_mic %>
-					<% end %>
-				<br/>
+	<!-- News -->
+	<h2>News</h2>
+	<div class="infosection">
+		<% if @open_mic.posts.empty? %>
+			<li> There is currently no news for this Open Mic.</li>
+		<% else %>
+			<% @open_mic.posts.order(:updated_at).reverse_order.limit(5).each do |post| %>
+				<li><%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %></li>
 			<% end %>
+		<% end %>
+	</div>
+	<%= link_to "View All News", open_mic_posts_url(@open_mic) %>
+
+	<br/><br/>
+
+	<% if host?(@open_mic) || admin? %>
+		<p>
+			<%= form_for @post do |f| %>
+  				<%= render 'shared/error_messages', :object => f.object %>
+  				<div class="field">
+   		 			<%= f.text_area :body, :class => "post", :placeholder => "You are the host of this open mic! Feel free to post some news here!" %>		
+    			</div>
+ 				<%= f.hidden_field :open_mic_id, :value => @open_mic.id %>
+  				<div class="actions">
+    				<%= f.submit "Publish News" %>
+  				</div>
+			<% end %>
+		</p>
+	<% end %>
+
+	<!-- Attendees -->
+	<h2>Attendees</h2>
+	<% if signed_in? %>
+		<% if !@open_mic.users.empty? %>
+			<div class="infosection">		
+				<ul>
+					<% @open_mic.users.each do |attendee| %>
+						<li><%= attendee.first_name + ' ' + attendee.last_name %></li>
+					<% end %>
+				</ul>
+			</div>
+		
+		<% end %>
+	
+		<% if @open_mic.users.include?(current_user) %>
+			<%= link_to 'Click Here to Not Attend This Week', :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id %>
+		<% else %>
+			<%= link_to 'Click Here to Attend This Week', :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
+		<% end %>
+		<br/>
+		<br/>
+		Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
+	<% else %>
+		<%= link_to 'Sign in', '/signin' %> to view attendee list and attend yourself!
+	<% end %>
+	<br/>
+	<br/>
+
+	<!-- General info -->
+	<h2>General Info</h2>
+	<div class="infosection">
+		<table class="address">
+			<tr>
+				<td>
+					<!-- Date and Time -->
+					<h2>When</h2>
+					<%= @open_mic.day_of_week.pluralize() %><br/>
+					<% if !@open_mic.start_time.nil? %>
+						Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
+					<% end %>
+					<% if !@open_mic.end_time.nil? %>
+						End Time: <%= @open_mic.end_time.strftime("%I:%M%p") %>
+					<% end %>
+
+					<% if !@open_mic.url.nil? && @open_mic.url.strip != "" %>
+						<p>
+							<h2>Official Home Page</h2>	
+							<%= link_to @open_mic.url, @open_mic.url, :target => "_blank" %>
+						</p>
+					<% end %>
+
+
+					<!-- Hosts -->
+					<% if !@open_mic.hosts.empty? %>
+						<h2>Host
+				
+							<% if host?(@open_mic) %>
+				 				| <i>You are a host of this Open Mic!</i>
+							<% end %>
+						</h2>
+						<% @open_mic.hosts.each do |host| %>
+							<%= host.full_name %>
+							<% if admin? %>
+								| <%= link_to "remove", :controller => "open_mics", :action => "remove_host", :method => :post, :host_to_remove => host, :id => @open_mic %>
+							<% end %>
+							<br/>
+						<% end %>
 		
 
-<% end %>
+					<% end %>
 
-<% if admin? %>
-	<%= form_tag("/open_mics/add_host", :method => "post") do %>
-  		<%= label_tag(:host_to_add, "Add Host:") %>
-  		<%= collection_select :host_to_add, :id, User.all, :id, :full_name %>
-  		<%= hidden_field_tag(:id, @open_mic.id)%>
-  		<%= submit_tag("Add") %>
-	<% end %>
-<% end %>
+					<% if admin? %>
+						<%= form_tag("/open_mics/add_host", :method => "post") do %>
+  							<%= label_tag(:host_to_add, "Add Host:") %>
+  							<%= collection_select :host_to_add, :id, User.all, :id, :full_name %>
+  							<%= hidden_field_tag(:id, @open_mic.id)%>
+  							<%= submit_tag("Add") %>
+						<% end %>
+					<% end %>
 
-<!-- Address and Contact -->
-<% if !@open_mic.address_blank? %>
-<h2>Address</h2>
-	<table class="address">
-		<tr>
-			<td>
-				<%= @open_mic.street_1 %><br/>
-				<% unless @open_mic.street_2.blank? %>
-					<%= @open_mic.street_2 %><br/>
-				<% end %>
-				<%= @open_mic.city %><br/>
-				<%= @open_mic.prov_state %><br/>
-				<% unless @open_mic.postal_zip.blank? %>
-					<%= @open_mic.postal_zip %><br/>
-				<% end %>
-				<%= @open_mic.country %><br/>
-			</td>
-			
-			<!-- Load Google Map -->
-			<% if !@gmaps_address.nil? %>
-				<td class='map'>
-					<div class="map_container">				
-						<div id="map_canvas"></div>
-					</div>
+					<!-- Address and Contact -->
+					<% if !@open_mic.address_blank? %>
+						<h2>Address</h2>
+						<%= @open_mic.street_1 %><br/>
+						<% unless @open_mic.street_2.blank? %>
+							<%= @open_mic.street_2 %><br/>
+						<% end %>
+						<%= @open_mic.city %><br/>
+						<%= @open_mic.prov_state %><br/>
+						<% unless @open_mic.postal_zip.blank? %>
+							<%= @open_mic.postal_zip %><br/>
+						<% end %>
+						<%= @open_mic.country %><br/>
+					<% end %>
 				</td>
 			
-				  
-  				<!-- Google Maps Javascript API -->
-  				<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAobCjmE-CweLXzArO1JL-Ogn2LjGGStAs&sensor=false">
-				</script>
+				<!-- Load Google Map -->
+				<% if !@gmaps_address.nil? %>
+					<td class='map'>
+						<div class="map_container">				
+							<div id="map_canvas"></div>
+						</div>
+					</td>
 			
-				<script type="text/javascript">
+				  
+  					<!-- Google Maps Javascript API -->
+  					<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAobCjmE-CweLXzArO1JL-Ogn2LjGGStAs&sensor=false">
+					</script>
+			
+					<script type="text/javascript">
+			
+						/* Initialize Map */									
+    					var latlng = new google.maps.LatLng(-34.397, 150.644);
+    					var myOptions = {
+      						zoom: 15,
+      						center: latlng,
+      						mapTypeId: google.maps.MapTypeId.ROADMAP
+    					};
+   						var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 				
-					/* Initialize Map */									
-    				var latlng = new google.maps.LatLng(-34.397, 150.644);
-    				var myOptions = {
-      					zoom: 15,
-      					center: latlng,
-      					mapTypeId: google.maps.MapTypeId.ROADMAP
-    				};
-   					var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				
-					/* Geocode Address */
-					geocoder = new google.maps.Geocoder();
-					geocoder.geocode( { 'address': '<%= @gmaps_address %>'}, function(results, status) {
-      					if (status == google.maps.GeocoderStatus.OK) {
-        					map.setCenter(results[0].geometry.location);
-        					var marker = new google.maps.Marker({
-            					map: map, 
-            					position: results[0].geometry.location
-        					});
-      					} 
-    				});
+						/* Geocode Address */
+						geocoder = new google.maps.Geocoder();
+						geocoder.geocode( { 'address': '<%= @gmaps_address %>'}, function(results, status) {
+      						if (status == google.maps.GeocoderStatus.OK) {
+        						map.setCenter(results[0].geometry.location);
+       							var marker = new google.maps.Marker({
+           							map: map, 
+           							position: results[0].geometry.location
+        						});
+      						} 
+    					});
 					
 
-  				</script>
-			<% end %>	
+  					</script>
+				<% end %>	
 			
-		</tr>
-	</table>
-</div>
-<% end %>
-
-
+			</tr>
+		</table>
+	</div>
 
 <% else %>
 	<h1>Open Mic Coming Soon!</h1>
