@@ -48,9 +48,9 @@
 	<%= f.text_field :postal_zip %>
 </div>
 <div class="field">
-	<%= f.label :country %>
+	<%= f.label :country %> (automatically populated by selecting province/state)
 	<br />
-	<%= f.text_field :country %>
+	<%= f.text_field :country, :readonly => "true" %> 
 </div>
 <div class="field">
 	<%= f.label :url, 'Official Home Page URL' %>
