@@ -3,7 +3,10 @@
 <head>
   	<title>Capo</title>
   	<%= stylesheet_link_tag 'main' %>
-  	<%= javascript_include_tag :defaults %>
+  	
+  	<%= javascript_include_tag 'prototype.js' 'effects.js' 'dragdrop.js' 'controls.js' 'application.js' %>
+  	<%= javascript_include_tag 'jquery-1.7.min.js'%>
+  	<%= javascript_include_tag 'rails.js'%>
   	<%= csrf_meta_tag %>  
   	
   	<!--[if lt IE 9]>

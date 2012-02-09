@@ -37,7 +37,10 @@
 <div class="field">
 	<%= f.label :prov_state, 'Province/State' %>
 	<br />
-	<%= f.text_field :prov_state %>
+	<select id="open_mic_prov_state" name="open_mic[prov_state]">
+  		<%= options_for_select( [[ "Select a Province/State", "" ]] + 
+  			provinces_and_states, :selected => @open_mic.prov_state )%>
+	</select>
 </div>
 <div class="field">
 	<%= f.label :postal_zip, 'Postal Code/Zip Code' %>
@@ -54,3 +57,26 @@
 	<br />
 	<%= f.text_field :url %>
 </div>
+
+<script type="text/javascript">
+	$("#open_mic_prov_state").change(function(){
+		if( ($("#open_mic_prov_state").val() == "AB") ||
+			($("#open_mic_prov_state").val() == "BC") ||
+			($("#open_mic_prov_state").val() == "MB") ||
+			($("#open_mic_prov_state").val() == "NB") ||
+			($("#open_mic_prov_state").val() == "NL") ||
+			($("#open_mic_prov_state").val() == "NT") ||
+			($("#open_mic_prov_state").val() == "NS") ||
+			($("#open_mic_prov_state").val() == "NU") ||
+			($("#open_mic_prov_state").val() == "ON") ||
+			($("#open_mic_prov_state").val() == "QC") ||
+			($("#open_mic_prov_state").val() == "SK") ||
+			($("#open_mic_prov_state").val() == "YT")) {
+			$("#open_mic_country").val("Canada");		
+		}
+		else {
+			$("#open_mic_country").val("United States");
+		}
+	});
+</script>
+

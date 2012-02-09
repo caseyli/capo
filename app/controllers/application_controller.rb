@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
+  include LocationsHelper
 
   before_filter :set_iphone_format
   
