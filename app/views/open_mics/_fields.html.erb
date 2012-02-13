@@ -37,10 +37,8 @@
 <div class="field">
 	<%= f.label :prov_state, 'Province/State' %>
 	<br />
-	<select id="open_mic_prov_state" name="open_mic[prov_state]">
-  		<%= options_for_select( [[ "Select a Province/State", "" ]] + 
-  			provinces_and_states, :selected => @open_mic.prov_state )%>
-	</select>
+	<%= f.select :prov_state, options_for_select([[ "Select a Province/State", "" ]] + 
+  			provinces_and_states, :selected => @open_mic.prov_state) %>
 </div>
 <div class="field">
 	<%= f.label :postal_zip, 'Postal Code/Zip Code' %>
