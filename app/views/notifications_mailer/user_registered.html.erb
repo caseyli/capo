@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+		<meta content="text/html; charset=UTF-8" http-equip="Content-Type">
+	</head>
+	<body>
+		<p>New Capo User Registered: <%= @user.email %></p>
+		<ul>
+			<li><%= "#{@user.first_name} #{@user.last_name}" %></li>
+			<li><%= @user.email %></li>
+		</ul>
+	</body>
+</html>
