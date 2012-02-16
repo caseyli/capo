@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include LocationsHelper
 
   before_filter :set_iphone_format
+  before_filter :redirect_iphone_format
   
   helper_method :is_iphone_request?
     
@@ -21,6 +22,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_iphone_format
+    if request.format == :iphone
+      redirect_to root_path
+    end
+  end
   
   def is_iphone_request?
       request.user_agent =~ /(iPhone)/

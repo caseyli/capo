@@ -57,7 +57,6 @@ class OpenMicsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render :json => @open_mics }
-      format.iphone { redirect_to root_path }
     end
   end
   

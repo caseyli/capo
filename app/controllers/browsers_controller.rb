@@ -1,4 +1,6 @@
 class BrowsersController < ApplicationController
+
+  skip_before_filter  :redirect_iphone_format
     
   def desktop
     cookies["browser"] = "desktop"
