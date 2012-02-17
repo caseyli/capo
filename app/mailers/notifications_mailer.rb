@@ -14,4 +14,11 @@ class NotificationsMailer < ActionMailer::Base
          :from => "capoapp@gmail.com",
          :subject => "New User Registered for #{user.email}")
   end
+  
+  def welcome_email(user)
+    @user = user
+    mail(:to => user.email,
+         :from => "capoapp@gmail.com",
+         :subject => "Welcome to Capo!")
+  end
 end
