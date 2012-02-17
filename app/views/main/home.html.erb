@@ -9,9 +9,12 @@
 
 <div id="slider">
 	<ul>
-		<li><%= link_to image_tag("Submission-Splash.png", :alt => "Image 3", :class => "rotatorimage"),  "/open_mics/new" %></li>				
-		<li><%= image_tag("iPhone-Splash.png", :alt => "Image 1", :class => "rotatorimage") %></li>
-		<li><%= link_to image_tag("Host-Splash.png", :alt => "Image 2", :class => "rotatorimage"), "/feedback" %></li>
+		<% unless signed_in? %>
+			<li><%= link_to image_tag("Register-Splash.png", :alt => "Register", :class => "rotatorimage"),  "/signup" %></li>
+		<% end %>
+		<li><%= link_to image_tag("Submission-Splash.png", :alt => "Submit Open Mics", :class => "rotatorimage"),  "/open_mics/new" %></li>				
+		<li><%= image_tag("iPhone-Splash.png", :alt => "iPhone Compatible", :class => "rotatorimage") %></li>
+		<li><%= link_to image_tag("Host-Splash.png", :alt => "Host Accounts", :class => "rotatorimage"), "/feedback" %></li>
 	</ul>
 </div>
 
