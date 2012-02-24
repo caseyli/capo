@@ -3,7 +3,7 @@ task :reset_attendees => :environment do
   
     # Clear Attendees Day After Open Mic
     
-    yesterday = ""
+    yesterday = 0
     
     if Time.now.wday == 0
       yesterday = 6
