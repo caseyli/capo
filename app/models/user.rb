@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   
   has_many :posts
   
+  default_scope order("first_name")
+  
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
