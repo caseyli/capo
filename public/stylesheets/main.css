@@ -321,6 +321,37 @@ nav ul li a:hover {
 
 /* Lists */
 
+ul.open-mic-list {
+	padding: 0 0 0 0;
+}
+
+ul.open-mic-list li {
+	list-style-type: none;
+	display: block;
+}
+
+ul.open-mic-list li a {
+	font-size: 1.2em;
+	border: 1px solid;
+	border-radius: 5px;
+	border-color: black;
+	padding: 5px 5px 5px 5px;
+	margin: 5px auto 5px 0;
+	text-decoration: none;
+	background-color: #DDDDDD;
+	color: #333333;
+	width: 100%;
+	display: block;
+}
+
+ul.open-mic-list li a:hover {
+	text-decoration: none;
+	background-color: #000000;
+	color: white;
+}
+
+
+
 ul.bodylist {
 	padding: 0 0 0 0;
 }

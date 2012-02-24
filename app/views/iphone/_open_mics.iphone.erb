@@ -23,26 +23,26 @@
 				var ihtml = "";
 				jQuery.each(data, function() {
 					ihtml = "<li class='arrow'><a href='#' id='openmicLink' open_mic_id='" + this.open_mic.id + "'>" + this.open_mic.name + "</a></li>"
-					switch (this.open_mic.day_of_week) {
-						case "Sunday":
+					switch (this.open_mic.dow) {
+						case 0:
 							sunday_list += ihtml;
 							break;
-						case "Monday":
+						case 1:
 							monday_list += ihtml;
 							break;
-						case "Tuesday":
+						case 2:
 							tuesday_list += ihtml;
 							break;
-						case "Wednesday":
+						case 3:
 							wednesday_list += ihtml;
 							break;
-						case "Thursday":
+						case 4:
 							thursday_list += ihtml;
 							break;
-						case "Friday":
+						case 5:
 							friday_list += ihtml;
 							break;
-						case "Saturday":
+						case 6:
 							saturday_list += ihtml;
 							break;
 
@@ -85,7 +85,7 @@
 				/* Time and Day */
 				ihtml += "<div class='infosection'>";
 				ihtml += "<p>";
-				ihtml +=  o.day_of_week + "s<br/>";		
+				ihtml +=  dayOfWeek(o.dow) + "s<br/>";		
 				ihtml += "Start Time: " + timeHoursMins(o.start_time) + "<br/>";
 				ihtml += "End Time: " + timeHoursMins(o.end_time) + "<br/>";
 				ihtml += "</p>";

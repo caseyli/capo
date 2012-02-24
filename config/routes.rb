@@ -4,7 +4,6 @@ Capo::Application.routes.draw do
   get "sessions/new"
   get "main/home"
     
-  get "open_mics/index_day_of_week"
   get "open_mics/attend"
   get "open_mics/unattend"
   get "open_mics/attendee_list"

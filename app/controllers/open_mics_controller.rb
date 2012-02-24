@@ -37,21 +37,9 @@ class OpenMicsController < ApplicationController
     @open_mics = OpenMic.published.all
 
     if admin?
-      @open_mics_sunday = OpenMic.find_all_by_day_of_week("Sunday")
-      @open_mics_monday = OpenMic.find_all_by_day_of_week("Monday")
-      @open_mics_tuesday = OpenMic.find_all_by_day_of_week("Tuesday")
-      @open_mics_wednesday = OpenMic.find_all_by_day_of_week("Wednesday")
-      @open_mics_thursday = OpenMic.find_all_by_day_of_week("Thursday")
-      @open_mics_friday = OpenMic.find_all_by_day_of_week("Friday")
-      @open_mics_saturday = OpenMic.find_all_by_day_of_week("Saturday")
+      @open_mics = OpenMic.all
     else
-      @open_mics_sunday = OpenMic.published.find_all_by_day_of_week("Sunday")
-      @open_mics_monday = OpenMic.published.find_all_by_day_of_week("Monday")
-      @open_mics_tuesday = OpenMic.published.find_all_by_day_of_week("Tuesday")
-      @open_mics_wednesday = OpenMic.published.find_all_by_day_of_week("Wednesday")
-      @open_mics_thursday = OpenMic.published.find_all_by_day_of_week("Thursday")
-      @open_mics_friday = OpenMic.published.find_all_by_day_of_week("Friday")
-      @open_mics_saturday = OpenMic.published.find_all_by_day_of_week("Saturday")
+      @open_mics = OpenMic.published.all
     end
     
     respond_to do |format|
@@ -151,13 +139,6 @@ class OpenMicsController < ApplicationController
     end
   end
   
-  def index_day_of_week
-    @open_mics = OpenMic.find_by_day_of_week(params[:day_of_week])
-    respond_to do |format|
-      format.json { render :json => @open_mics.to_json }
-    end
-  end
-    
   private
   
     def gmaps_address(open_mic)

@@ -7,7 +7,7 @@
 		<p>Open Mic Submitted for <%= @open_mic.name %></p>
 		<ul>
 			<li><%= @open_mic.name %></li>
-			<li><%= @open_mic.day_of_week %></li>
+			<li><%= Date::DAYNAMES[@open_mic.dow] %></li>
 		</ul>
 	</body>
 </html>

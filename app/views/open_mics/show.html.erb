@@ -76,7 +76,7 @@
 				<td>
 					<!-- Date and Time -->
 					<h2>When</h2>
-					<%= @open_mic.day_of_week.pluralize() %><br/>
+					<%= Date::DAYNAMES[@open_mic.dow].pluralize() %><br/>
 					<% if !@open_mic.start_time.nil? %>
 						Start Time: <%= @open_mic.start_time.strftime("%I:%M%p") %><br/>
 					<% end %>

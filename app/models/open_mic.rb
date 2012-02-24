@@ -1,6 +1,5 @@
 class OpenMic < ActiveRecord::Base
   attr_accessible :name, 
-                  :day_of_week, 
                   :start_time, 
                   :end_time, 
                   :street_1, 
@@ -10,7 +9,8 @@ class OpenMic < ActiveRecord::Base
                   :postal_zip, 
                   :country,
                   :url,
-                  :published
+                  :published,
+                  :dow
                   
   has_and_belongs_to_many :users
   has_and_belongs_to_many :hosts, :class_name => "User", 
@@ -20,7 +20,8 @@ class OpenMic < ActiveRecord::Base
   
   has_many :posts
   
-  scope :published, where(:published => true)
+  default_scope order("dow")
+  scope :published, where(:published => true).order("dow")
   
   def add_attendee(user)
     users << user
