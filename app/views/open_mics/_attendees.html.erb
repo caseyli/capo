@@ -1,0 +1,28 @@
+	<!-- Attendees -->
+	<h2>Attendees</h2>
+	<% if signed_in? %>
+		<% if @open_mic.users.include?(current_user) %>
+			<%= link_to image_tag("unattend.png"), :controller => 'open_mics', :action => 'unattend', :id => @open_mic.id, :class => 'green-button' %>
+		<% else %>
+			<%= link_to image_tag("attend.png"), :controller => 'open_mics', :action => 'attend', :id => @open_mic.id %>
+		<% end %>
+	
+		<% if !@open_mic.users.empty? %>
+				<ul class="attendees-list">
+					<% @open_mic.users.each do |attendee| %>
+						<li>
+							<%= gravatar_image_tag attendee.email, :class => 'gravatar-small' %>
+							<%= link_to attendee.first_name + ' ' + attendee.last_name, attendee %>
+						</li>
+					<% end %>
+				</ul>		
+		<% end %>
+		<br/>
+		<br/>
+		Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
+	<% else %>
+		<%= link_to image_tag("signin.png"), '/signin' %>
+		<br/>
+		<br/>
+		Signin to view attendee list and attend yourself!
+	<% end %>

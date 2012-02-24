@@ -41,6 +41,10 @@ a:hover {
 	text-decoration: none;
 }
 
+.full-width {
+	width: 100%;
+}
+
 .container {
 	width: 700px;
 	margin:0 auto;
@@ -178,6 +182,11 @@ a:hover {
 	display:inline-block;
 	vertical-align:top;
 	font-size: 1.2em;
+}
+
+.gravatar-small {
+	width: 25px;
+	height: 25px;
 }
 
 /* General Forms */
@@ -350,7 +359,31 @@ ul.open-mic-list li a:hover {
 	color: white;
 }
 
+ul.attendees-list li {
+	list-style-type: none;
+	display:block;
+	padding: 10px;
+	color: black;
+	margin-left: -10px;
+}
 
+ul.attendees-list li a {
+	color: black;
+	text-decoration: none;
+}
+
+ul.attendees-list li a:hover {
+	text-decoration: underline;
+}
+
+
+ul.attendees-list li:nth-child(odd) { 
+	background-color:#eee; 
+}
+
+ul.attendees-list li:nth-child(even) { 
+	background-color:#fff; 
+}
 
 ul.bodylist {
 	padding: 0 0 0 0;
@@ -407,6 +440,14 @@ table.weektable tr td {
 table.weektable tr td.leftcol {
 }
 
+.attendees-column {
+	border-left-color: white;
+	border-left-width: 1px;
+	border-left-style: solid;
+	vertical-align: top;
+	padding: 0 0 0 10px;
+	width: 200px;
+}
 
 /* Address Table */
 .infosection table {
@@ -423,12 +464,12 @@ table.generalinfo tr td.map {
 
 /* Google Maps */
 .map_container {
-	padding: 10px 0px 10px 90px;
+	padding: 10px 0px 10px 20px;
 }
 
 #map_canvas {
-	width: 300px;
-	height: 250px;
+	width: 200px;
+	height: 200px;
 }
 
 /* posts */
