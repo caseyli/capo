@@ -1,11 +1,16 @@
-<h1>
-	<%= @user.first_name + " " + @user.last_name %>
+<div class='gravatar-image'>
+	<%= gravatar_image_tag(@user.email, :alt => @user.first_name + " " + @user.last_name) %>
+</div>
+<div class='gravatar-description'>
+	<h1>
+		<%= @user.first_name + " " + @user.last_name %>
 	
-	<% if admin? %>
-		| <%= link_to "delete", @user, :method => :delete, :confirm => "You sure?",
+		<% if admin? %>
+			| <%= link_to "delete", @user, :method => :delete, :confirm => "You sure?",
 		                            :title => "Delete #{@user.first_name}" %>
-	<% end %>
-</h1>
+		<% end %>
+	</h1>
+</div>
 <div class="infosection">
 	<h2>Attending:</h2>
 	<ul>

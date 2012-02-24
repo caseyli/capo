@@ -1,4 +1,16 @@
+
 <h1>Edit Profile</h1>
+
+<p>
+	<div class='gravatar-image'>
+		<%= gravatar_image_tag(@user.email, :alt => @user.first_name + " " + @user.last_name) %>
+	</div>
+	<div class='gravatar-description'>
+		You can change your avatar at <%= link_to 'gravatar.com', 'http://www.gravatar.com', :target => "_blank" %> (it's free)
+		<br/>
+		We're using the avatar associated with <%= @user.email %>
+	</div>
+</p>
 
 <%= form_for @user do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>

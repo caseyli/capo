@@ -9,6 +9,8 @@ gem 'pg'
 
 gem 'will_paginate'
 
+gem 'gravatar_image_tag'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

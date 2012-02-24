@@ -167,6 +167,19 @@ a:hover {
 	padding-top: 60px;
 }
 
+/* Profile */
+.gravatar-image {
+	display:inline-block;
+}
+
+.gravatar-description {
+	margin-top: 15px;
+	margin-left: 10px;
+	display:inline-block;
+	vertical-align:top;
+	font-size: 1.2em;
+}
+
 /* General Forms */
 
 .field {
