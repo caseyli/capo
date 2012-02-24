@@ -11,7 +11,7 @@ task :reset_attendees => :environment do
       yesterday = Time.now.wday-1
     end
     
-    puts "Removing attendees for open mics on " + yesterday + "..."
+    puts "Removing attendees for open mics on " + Date::DAYNAMES(yesterday) + "..."
     OpenMic.find_all_by_dow(yesterday).each do |open_mic|
       open_mic.remove_all_attendees
       puts "Removing attendees for " + open_mic.name
