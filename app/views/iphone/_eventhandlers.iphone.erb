@@ -22,7 +22,9 @@
 		});
 		
 		$("#toolbarlogoffButton").tap(function(e, info) {
-			logoff();
+			if (confirm("Are you sure you want to logoff?")) {
+				logoff();
+			}
 		});
 		
 		
