@@ -24,6 +24,23 @@
 	
 }
 
+/* Home Page */
+
+.view-full-site {
+	
+}
+
+.view-full-site a {
+	padding: 6px;
+	border: 1px solid;
+	border-color: #888888;
+	border-radius: 5px;
+	background-color: #555555;
+	color: #BBBBBB;
+	text-decoration: none;
+	font-size: 0.7em;
+}
+
 /* Google Maps */
 #openmic_body {
 	text-align: center;
@@ -43,4 +60,11 @@
 #mapcanvas {
 	width: 300px;
 	height: 300px;
+}
+
+/* Profile */
+#gravatar {
+	display:block;
+	text-align: center;
+	padding: 0 0 10px 0;
 }

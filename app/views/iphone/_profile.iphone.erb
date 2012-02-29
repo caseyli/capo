@@ -9,6 +9,9 @@
 			success: function(data, textStatus, jqXHR) {
 				if(data != null) {
 					ihtml = "<br/>";
+					ihtml += "<a href='http://www.gravatar.com' target='_blank'><div id='gravatar'></div></a>";
+					ihtml += "<div class='blockcenter'>Click on image to change using Gravatar</div>";
+					ihtml += "<br/>";
 					ihtml += "<div class='infosection'>";
 					ihtml += data.user.first_name + " " + data.user.last_name;
 					ihtml += "<br/>" + data.user.email;
@@ -20,6 +23,9 @@
 					$("#edit_user_first_name").val(data.user.first_name);
 					$("#edit_user_last_name").val(data.user.last_name);
 					$("#updateprofileButton").attr("user_id", data.user.id);
+					
+					$("#gravatar").html($.gravatar(data.user.email, { size: 100, rating: 'pg', image: 'identicon'}));
+					
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
