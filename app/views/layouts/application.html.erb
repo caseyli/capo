@@ -61,13 +61,16 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	
-	<div class="container">
-		<div class="header">
+	<div class="header">
+		<div class="header-container">
 			<%= render 'layouts/header'%>
+		</div>
+	</div>
+	
+	<div class="container">
 			<% flash.each do |key, value| %>
 				<div class="flash <%= key %>"><%= value %></div>
 			<% end %>
-		</div>
 		<div class="main">
 			<%= yield %>
 		</div>

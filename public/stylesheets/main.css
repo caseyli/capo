@@ -11,8 +11,8 @@ header
 
 /* General */
 
-body {
-	background-image: -webkit-gradient(
+.header {
+		background-image: -webkit-gradient(
 		radial, 500 25%, 20, 500 25%, 800, from(#006185), to(#00214a)
 	);
 	 /* for IE */
@@ -20,11 +20,30 @@ body {
 	
 	/* Firefox */
 	background: -moz-linear-gradient(top,  #006185,  #00214a);
+}
+
+.header-container {
+	width: 700px;
+	margin:0 auto;
+}
+
+body {
+	/*background-image: -webkit-gradient(
+		radial, 500 25%, 20, 500 25%, 800, from(#006185), to(#00214a)
+	);
+	 /* for IE *
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006185', endColorstr='#00214a');
 	
-	color: #eeeeee;
+	/* Firefox *
+	background: -moz-linear-gradient(top,  #006185,  #00214a);*/
+	background-color: #CCCCCC;
+	
+	color: #333333;
 	font-size:75%;
 	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
 	min-height: 1500px;
+	
+	margin: 0;
 }
 
 a img {
@@ -33,11 +52,11 @@ a img {
 
 .main a {
 	text-decoration: underline;
-	color: #eeeeee;
+	color: #333333;
 }
 
 a:hover {
-	color: #eeeecc;
+	color: #FFFFFF;
 	text-decoration: none;
 }
 
@@ -174,6 +193,7 @@ a:hover {
 /* Profile */
 .gravatar-image {
 	display:inline-block;
+	padding: 10px 0 0 0;
 }
 
 .gravatar-description {
@@ -201,7 +221,7 @@ input[type="text"], input[type="password"] {
 }
 
 .field label{
-	color: white;
+	color: #555555;
 	padding-left: 5px;
 	font-size: 15px;
 }
@@ -209,7 +229,7 @@ input[type="text"], input[type="password"] {
 /* Navigation */
 
 nav {
-	padding: 1em 0em;
+	padding: 0em 0em;
 	white-space: nowrap;
 }
 
@@ -218,7 +238,6 @@ nav ul {
 	padding: 0;
 	width: 100%;
 	height: 40px;
-	background:url(/images/menubg.png);
 }
 
 nav ul li {
@@ -239,8 +258,8 @@ nav ul li a:visited {
 }
 
 nav ul li a:hover {
-	color:#fff;
-	text-decoration: underline;
+	color:#000;
+	text-decoration: none;
 }
 
 /* Error Messages */
@@ -252,6 +271,7 @@ nav ul li a:hover {
   padding: 7px;
   padding-bottom: 12px;
   margin-bottom: 20px;
+  margin-top: 10px;
   background-color: #fff;
 }
 
@@ -283,6 +303,7 @@ nav ul li a:hover {
 	padding: 10px 10px 10px 10px;
 	background: #fff;
 	color: #000000;
+	margin-top: 10px;
 }
 
 .success {
@@ -400,29 +421,14 @@ ul.bodylist li a {
 	padding: 5px 5px 5px 5px;
 	margin: 5px auto 5px 0;
 	text-decoration: none;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#001d41));
-	
-	/* Firefox */
-	background: -moz-linear-gradient(top,  #000,  #001d41);
-	
-	/* for IE */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#001d41');
-	
+	background-color: #FFFFFF;
 	display: block;
 	width: 100%;
 }
 
 ul.bodylist li a:hover {
 	text-decoration: none;
-	
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#001d41));
-	
-	/* Firefox */
-	background: -moz-linear-gradient(top,  #fff,  #001d41);
-	
-	/* for IE */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#001d41');
-	
+	background-color: #222222;
 	display: block;
 }
 
@@ -506,6 +512,7 @@ table.generalinfo tr td.map {
 	border-color: #111199;
 	color: #000000;
 	border-radius: 5px;
+	margin: 10px 0 0 0;
 }
 
 .float-left {
