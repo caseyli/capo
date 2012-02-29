@@ -496,3 +496,18 @@ table.generalinfo tr td.map {
 	text-decoration:none;
 	margin: 10px;
 }
+
+/* Open Mics */
+.location-filter {
+	display:block;
+	background-color: #AADDFF;
+	padding: 5px;
+	border: 1px solid;
+	border-color: #111199;
+	color: #000000;
+	border-radius: 5px;
+}
+
+.float-left {
+	float: left;
+}

@@ -1,3 +1,21 @@
+<!-- This is not scalable. Need to generate lists by DOW in Controller with one loop pass -->
+<div class='location-filter'>
+	<%= form_tag({:controller => "open_mics", :action => "index"}, :method => "get", :class => "float-left") do %>
+	
+  		<%= label_tag "Filter by City" %>: 
+  		
+  		<%= select_tag :filter_city_prov_state, 
+  			options_for_select(
+  				OpenMic.unscoped.select("DISTINCT CITY, PROV_STATE").collect { |x| "#{x.city}, #{x.prov_state}" },
+  				:selected => @selected_city_prov_state) %>
+		<%= submit_tag "Submit" %>
+		
+	<% end %>
+	<%= form_tag("/open_mics", :method => "get") do %>
+		<%= hidden_field_tag :filter_city %>
+		<%= submit_tag "Clear" %>
+	<% end %>
+</div>
 <ul class="open-mic-list">
 	<% (0..6).each do |i| %>
 		<h2><%= Date::DAYNAMES[i].downcase %></h2>

@@ -32,16 +32,25 @@ class OpenMicsController < ApplicationController
   end
   
   def index
-    # this Code needs to be heavily optimized for performance
-    
     @open_mics = OpenMic.published.all
-
-    if admin?
-      @open_mics = OpenMic.all
-    else
-      @open_mics = OpenMic.published.all
-    end
+    @selected_city_prov_state = params[:filter_city_prov_state]
     
+    if @selected_city_prov_state.nil? || @selected_city_prov_state.blank?
+      if admin?
+        @open_mics = OpenMic.all
+      else
+        @open_mics = OpenMic.published.all
+      end
+    else
+      city = @selected_city_prov_state.split(',').first
+      prov_state = @selected_city_prov_state.split(',').last.strip
+      if admin?
+        @open_mics = OpenMic.where(:city => city, :prov_state => prov_state)
+      else
+        @open_mics = OpenMic.published.where(:city =>city, :prov_state => prov_state)
+      end      
+    end
+
     respond_to do |format|
       format.html
       format.json { render :json => @open_mics }
