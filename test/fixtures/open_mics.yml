@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  day_of_week: MyString
+  name: Royal Oak on the Canal
+  dow: 2
 
 two:
-  name: MyString
-  day_of_week: MyString
+  name: Georgetown Pub
+  dow: 3

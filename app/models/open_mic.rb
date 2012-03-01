@@ -23,6 +23,9 @@ class OpenMic < ActiveRecord::Base
   default_scope order("dow")
   scope :published, where(:published => true).order("dow")
   
+  validates :name, :presence => true
+  validates :dow, :presence => true
+  
   def add_attendee(user)
     users << user
     update

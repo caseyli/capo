@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  email: MyString
-  encrypted_password: MyString
-  salt: MyString
+  email: test@test.com
+  encrypted_password: hello
+  salt: hello
 
 two:
-  email: MyString
-  encrypted_password: MyString
-  salt: MyString
+  email: john@doe.com
+  encrypted_password: hello
+  salt: hello
