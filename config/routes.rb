@@ -8,6 +8,7 @@ Capo::Application.routes.draw do
   get "open_mics/unattend"
   get "open_mics/attendee_list"
   get "open_mics/attending_info"
+  get "open_mics/selectable_cities_with_prov_state"
   match "open_mics/add_host" => "open_mics#add_host"
   match "open_mics/remove_host" => "open_mics#remove_host"
   

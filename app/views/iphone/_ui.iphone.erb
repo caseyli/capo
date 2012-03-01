@@ -9,7 +9,7 @@
 		<%= image_tag "iphonemain.png" %>
 	</div>
 	<ul class="rounded">
-		<li class="arrow"><a href="#browse" id="homebrowselink">Browse</a></li>
+		<li class="arrow"><a href="#" id="homeBrowseButton">Browse</a></li>
 		<li><a href="#login" class="slideup">Login</a></li>
 		<li><a href="#feedback" class="pop">Feedback</a></li>
 		<li><a href="#about" class="pop">About</a></li>
@@ -33,7 +33,7 @@
 	</div>
 
 	<ul class="rounded">
-		<li class="arrow"><a href="#browse">Browse</a></li>
+		<li class="arrow"><a href="#" id='browseButton'>Browse</a></li>
 		<li><a href="#profile">Profile</a></li>
 		<li><a href="#" id="logoffButton">Logoff</a></li>
 		<li><a href="#feedback" class="pop">Feedback</a></li>
@@ -51,10 +51,29 @@
 	<div class="toolbar">
 		<h1>Browse</h1>
 		<a class="button back" href="#">Back</a>
+		<a class="button slideup" id="toolbarfilterButton" href="#filter">Filter</a>
 	</div>
             
      <div id="browse_body">
      </div>
+</div>
+
+<!-- FILTER -->
+<div id="filter">
+	<div class="toolbar">
+		<h1>Filter</h1>
+		<a class="button back" href="#">Cancel</a>
+	</div>
+	
+	<div id="filter_body">
+		<form>
+			<div class="blockcenter">
+				<select id="cityFilterSelect">
+				</select>
+			</div>
+			<a href="#" class='grayButton' id='submitFilterButton'>Submit</a>
+		</form>	
+	</div>
 </div>
 
 <!-- OPEN MIC INFO -->

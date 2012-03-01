@@ -6,7 +6,7 @@
   		
   		<%= select_tag :filter_city_prov_state, 
   			options_for_select(
-  				OpenMic.unscoped.select("DISTINCT CITY, PROV_STATE").collect { |x| "#{x.city}, #{x.prov_state}" },
+  				@selectable_cities_with_prov_state,
   				:selected => @selected_city_prov_state) %>
 		<%= submit_tag "Submit" %>
 		

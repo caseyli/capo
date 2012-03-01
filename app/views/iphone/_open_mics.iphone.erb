@@ -8,59 +8,13 @@
 	 * loadOpenMics()
 	 * Makes AJAX call to get a collection of open mics and populate the browse_body element.
 	 */
-	function loadOpenMics() {
+	function loadUnfilteredOpenMics() {
 		$.ajax({
 			url : "/open_mics/",
 			dataType : "json",
 			success : function(data, textStatus, jqXHR) {
-				var sunday_list = "";
-				var monday_list = "";
-				var tuesday_list = "";
-				var wednesday_list = "";
-				var thursday_list = "";
-				var friday_list = "";
-				var saturday_list = "";
-				var ihtml = "";
-				jQuery.each(data, function() {
-					ihtml = "<li class='arrow'><a href='#' id='openmicLink' open_mic_id='" + this.open_mic.id + "'>" + this.open_mic.name + "</a></li>"
-					switch (this.open_mic.dow) {
-						case 0:
-							sunday_list += ihtml;
-							break;
-						case 1:
-							monday_list += ihtml;
-							break;
-						case 2:
-							tuesday_list += ihtml;
-							break;
-						case 3:
-							wednesday_list += ihtml;
-							break;
-						case 4:
-							thursday_list += ihtml;
-							break;
-						case 5:
-							friday_list += ihtml;
-							break;
-						case 6:
-							saturday_list += ihtml;
-							break;
-
-					}
-					ihtml = "<ul class='edgetoedge'>";
-					ihtml += "<li class='sep'>sunday</li>" + sunday_list;
-					ihtml += "<li class='sep'>monday</li>" + monday_list;
-					ihtml += "<li class='sep'>tuesday</li>" + tuesday_list;
-					ihtml += "<li class='sep'>wednesday</li>" + wednesday_list;
-					ihtml += "<li class='sep'>thursday</li>" + thursday_list;
-					ihtml += "<li class='sep'>friday</li>" + friday_list;
-					ihtml += "<li class='sep'>saturday</li>" + saturday_list;
-					ihtml += "</ul>";
-				});
-				$("#browse_body").html(ihtml);
-				
-				/* Clear Buttons to avoid flicker when entering another open mic info */
-				$("#openmicinfo_actions").html(ihtml);
+				loadOpenMics(data);
+				jQT.goTo("#browse", "slideleft", "slideleft");
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				alert("Error: " + jqXHR.status);

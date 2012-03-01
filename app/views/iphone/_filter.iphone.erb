@@ -1,0 +1,56 @@
+<script type='text/javascript'>
+	/*
+	 * loadFilterCities
+	 */
+	function loadFilterCities() {
+		$.ajax({
+			url : "/open_mics/selectable_cities_with_prov_state",
+			dataType : "json",
+			success : function(data, textStatus, jqXHR) {
+				var ihtml = "";
+				ihtml += "<option value='0'>All Cities</option>";
+				jQuery.each(data, function(){
+					ihtml += "<option value='" + this + "'>" + this + "</option>";
+					$("#cityFilterSelect").html(ihtml);
+				});
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Sorry, could not load filters.");
+			}
+		});
+	}
+	
+	/*
+	 * filterOpenMics
+	 */
+	function filterOpenMics() {
+		if($("#cityFilterSelect").val() == "0") {
+			$.ajax({
+				url : "/open_mics/",
+				dataType : "json",
+				success : function(data, textStatus, jqXHR) {
+					loadOpenMics(data);
+					jQT.goBack("#browse", "slidedown", "slidedown");
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("Sorry, could not filter Open Mic list.");
+				}
+			});
+		}
+		else {
+			$.ajax({
+				url : "/open_mics/",
+				dataType : "json",
+				data: { filter_city_prov_state : $("#cityFilterSelect").val() },
+				success : function(data, textStatus, jqXHR) {
+					loadOpenMics(data);
+					jQT.goBack("#browse", "slidedown", "slidedown");
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					alert("Sorry, could not filter Open Mic list.");
+				}
+			});
+		}
+	
+	}
+</script>

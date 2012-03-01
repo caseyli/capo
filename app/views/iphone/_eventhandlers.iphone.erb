@@ -29,11 +29,24 @@
 		
 		
 		/* Open Mics */
-		$("#browse").bind('pageAnimationStart', function(event, info) {
-			if(info.direction == 'in') {
-				$("#homeloggedin").mask("Loading...");
-				loadOpenMics();
-			}
+		$("#filter").bind('pageAnimationStart', function(event, info){
+			loadFilterCities();
+		});
+		
+		$("#submitFilterButton").tap(function(e, info) {
+			filterOpenMics();
+		});
+		
+		
+		$("#homeBrowseButton").tap(function(e, info){
+			$("#home").mask("Loading...");
+			loadUnfilteredOpenMics();
+		});
+		
+		
+		$("#browseButton").tap(function(e, info){
+			$("#homeloggedin").mask("Loading...");
+			loadUnfilteredOpenMics();
 		});
 		
 		$("#browse").bind('pageAnimationEnd', function(event, info) {
@@ -86,6 +99,7 @@
 
 <%= render 'iphone/sessions' %>
 <%= render 'iphone/open_mics' %>
+<%= render 'iphone/filter' %>
 <%= render 'iphone/profile' %>
 <%= render 'iphone/utilities' %>
 <%= render 'iphone/feedback' %>

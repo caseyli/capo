@@ -33,6 +33,7 @@ class OpenMicsController < ApplicationController
   
   def index
     @open_mics = OpenMic.published.all
+    @selectable_cities_with_prov_state = cities_with_prov_state
     @selected_city_prov_state = params[:filter_city_prov_state]
     
     if @selected_city_prov_state.nil? || @selected_city_prov_state.blank?
@@ -148,7 +149,18 @@ class OpenMicsController < ApplicationController
     end
   end
   
+  def selectable_cities_with_prov_state
+    respond_to do |format|
+      format.json { render :json => cities_with_prov_state.to_json }
+    end
+  end
+  
+
   private
+  
+    def cities_with_prov_state
+      OpenMic.unscoped.select("DISTINCT CITY, PROV_STATE").collect { |x| "#{x.city}, #{x.prov_state}" }
+    end
   
     def gmaps_address(open_mic)
       if open_mic.street_1.nil? || open_mic.street_1.strip == '' ||
