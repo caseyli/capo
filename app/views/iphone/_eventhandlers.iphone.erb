@@ -56,7 +56,7 @@
 		});
 		
 		$("#openmicLink").tap(function(e, info) {
-			$(e.target).html("<img src='/images/spinner.gif' width='13px' height='13px' /> " + $(e.target).html());
+			$("#browse").mask("Loading...");
 			loadOpenMicInfo($(e.target).attr("open_mic_id"));
 		});
 		
