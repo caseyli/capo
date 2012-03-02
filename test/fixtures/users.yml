@@ -1,11 +1,1 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  email: test@test.com
-  encrypted_password: hello
-  salt: hello
-
-two:
-  email: john@doe.com
-  encrypted_password: hello
-  salt: hello
