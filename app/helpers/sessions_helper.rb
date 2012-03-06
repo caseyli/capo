@@ -30,8 +30,7 @@ module SessionsHelper
   def deny_access_for_non_hosts(open_mic)
     if signed_in?
       @open_mic = open_mic
-      redirect_to root_path, :notice => "You are not the host of this Open Mic." unless !@open_mic.nil?
-      redirect_to root_path, :notice => "You are not the host of this Open Mic." unless (host?(@open_mic) || admin?)
+      redirect_to root_path, :notice => "You are not the host of this Open Mic." unless @open_mic && (host?(@open_mic) || admin?)
     else
       deny_access
     end
