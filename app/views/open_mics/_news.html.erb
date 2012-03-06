@@ -15,7 +15,7 @@
 
 	<% if host?(@open_mic) || admin? %>
 		<p>
-			<%= form_for @post do |f| %>
+			<%= form_for [@open_mic, @post] do |f| %>
   				<%= render 'shared/error_messages', :object => f.object %>
   				<div class="field">
    		 			<%= f.text_area :body, :class => "post", :placeholder => "You are the host of this open mic! Feel free to post some news here!" %>		

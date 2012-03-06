@@ -8,14 +8,15 @@
 			<li>
 				<%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %> 
 				<% if host?(@open_mic) || admin? %>
-					| <%= link_to "delete", post, 
-						:method => :delete, 
-						:confirm => "Are you sure you want to delete #{post.body}?", 
-						:title => "Delete Post?" %>
+					| <%= link_to "delete", open_mic_post_path(@open_mic, post), 
+								:method => :delete, 
+								:confirm => "Are you sure you want to delete #{post.body}?", 
+								:title => "Delete Post?" %>
 				<% end %>
 			</li>
 		<% end %>
 	<% end %>
 </ul>
+
 
 <%= link_to "Back", @open_mic %>
