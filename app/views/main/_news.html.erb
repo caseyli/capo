@@ -13,12 +13,14 @@
 <% end %>
 </ul>
 
-<%= form_for @post, :url => { :controller => "posts", :action => "create_site_news" } do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-  	<div class="field">
-   		<%= f.text_area :body, :class => "post", :placeholder => "Post News" %>		
-    </div>
-	<div class="actions">
-    	<%= f.submit "Publish News" %>
-  	</div>
+<% if admin? %>
+	<%= form_for @post, :url => { :controller => "posts", :action => "create_site_news" } do |f| %>
+		<%= render 'shared/error_messages', :object => f.object %>
+  		<div class="field">
+   			<%= f.text_area :body, :class => "post", :placeholder => "Post News" %>		
+    	</div>
+		<div class="actions">
+    		<%= f.submit "Publish News" %>
+  		</div>
+	<% end %>
 <% end %>
