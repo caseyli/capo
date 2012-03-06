@@ -497,6 +497,7 @@ table.generalinfo tr td {
 
 table.generalinfo tr td.map {
 	text-align: center;
+	width: 325px;
 }
 
 /* Google Maps */
@@ -505,8 +506,8 @@ table.generalinfo tr td.map {
 }
 
 #map_canvas {
-	width: 200px;
-	height: 200px;
+	width: 95%;
+	height: 300px;
 }
 
 /* posts */
