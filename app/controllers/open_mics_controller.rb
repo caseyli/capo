@@ -22,6 +22,7 @@ class OpenMicsController < ApplicationController
   def show
     @open_mic = OpenMic.find(params[:id])
     @gmaps_address = gmaps_address(@open_mic)
+    @posts = @open_mic.posts.order(:updated_at).reverse_order.limit(5)
     
     @post = Post.new if host?(@open_mic) || admin?
     
