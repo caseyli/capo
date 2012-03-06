@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
   include LocationsHelper
+  include OpenMicsHelper
 
   before_filter :set_iphone_format
   before_filter :redirect_iphone_format

@@ -24,7 +24,7 @@ class OpenMicsController < ApplicationController
     @gmaps_address = gmaps_address(@open_mic)
     @posts = @open_mic.posts.order(:updated_at).limit(5)
     
-    @post = Post.new if host?(@open_mic) || admin?
+    @post = Post.new if can_manage_posts_for(@open_mic)
     
     respond_to do |format|
       format.html

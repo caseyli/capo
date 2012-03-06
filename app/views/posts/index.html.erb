@@ -7,7 +7,7 @@
 		<% @open_mic.posts.each do |post| %>
 			<li>
 				<%= post.updated_at.strftime("%B %d, %Y: ") + " " + post.body %> 
-				<% if host?(@open_mic) || admin? %>
+				<% if can_manage_posts_for(@open_mic) %>
 					| <%= link_to "delete", open_mic_post_path(@open_mic, post), 
 								:method => :delete, 
 								:confirm => "Are you sure you want to delete #{post.body}?", 

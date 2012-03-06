@@ -13,7 +13,7 @@
 
 	<br/><br/>
 
-	<% if host?(@open_mic) || admin? %>
+	<% if can_manage_posts_for(@open_mic) %>
 		<p>
 			<%= form_for [@open_mic, @post] do |f| %>
   				<%= render 'shared/error_messages', :object => f.object %>
