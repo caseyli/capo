@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
   
-  before_filter :load_open_mic
-  before_filter :except => [:index] do |controller|
+  before_filter :load_open_mic, :except => [:create_site_news]
+  before_filter :except => [:index, :create_site_news] do |controller|
     deny_access_for_non_hosts(@open_mic)
+  end
+  before_filter :only => [:create_site_news] do |controller|
+    deny_access_for_non_admins
   end
   
   def create
@@ -23,6 +26,17 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])    
     @post.destroy
     redirect_to open_mic_posts_url(@open_mic)
+  end
+  
+  def create_site_news
+    @post = Post.new(params[:post])
+    @post.user = current_user
+    if @post.save
+      flash[:success] = "Posted!"
+    else
+      flash[:success] = "Could not post news!"
+    end
+    redirect_to root_path
   end
   
   private

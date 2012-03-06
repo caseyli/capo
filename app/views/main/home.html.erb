@@ -1,53 +1,11 @@
-<h1>Welcome to Capo!</h1>
-<hr>
+<table class='home-table'>
+	<tr>
+		<td>
+			<%= render 'main' %>
+		</td>
+		<td class='news-column'>
+			<%= render 'news' %>
+		</td>
+	</tr>
+</table>
 
-<script type="text/javascript">
-	$(document).ready(function(){	
-		$("#slider").easySlider();
-	});	
-</script>
-
-<div id="slider">
-	<ul>
-		<% unless signed_in? %>
-			<li><%= link_to image_tag("Register-Splash.png", :alt => "Register", :class => "rotatorimage"),  "/signup" %></li>
-		<% end %>
-		<li><%= link_to image_tag("Submission-Splash.png", :alt => "Submit Open Mics", :class => "rotatorimage"),  "/open_mics/new" %></li>				
-		<li><%= image_tag("iPhone-Splash.png", :alt => "iPhone Compatible", :class => "rotatorimage") %></li>
-		<li><%= link_to image_tag("Host-Splash.png", :alt => "Host Accounts", :class => "rotatorimage"), "/feedback" %></li>
-	</ul>
-</div>
-
-<hr>
-
-<p>
-	Capo is an Open Mic Community Tool where audience members and players alike can find the latest entertainment!
-</p>
-<p>
-	New to Capo? Be sure to become a member by signing up <%= link_to 'here', '/signup' %>.
-</p>
-<p>
-	Know about an Open Mic that's not in our database, send us the information <%= link_to "here", "/open_mics/new" %>.
-</p>
-<p>
-	Are you the Host of an Open Mic? Want access to certain Host features? Let us know <%= link_to "here", "/feedback" %>.
-</p>
-<p>
-	We always welcome lots of feedback. Please send us your thoughts and suggestions <%= link_to "here", "/feedback" %>.
-</p>
-<hr>
-
-
-<% if is_iphone_request? %>
-	<div class="switchtoiphone">
-      <%= link_to "Switch To iPhone Site",
-          :controller => "browsers", 
-          :action => :mobile          
-          %>
-	</div>
-<% end %>
-
-<g:plusone annotation="inline"></g:plusone>
-<br/>
-<br/>
-<div class="fb-like" data-href="http://www.capoapp.ca" data-send="true" data-width="450" data-show-faces="true" data-colorscheme="dark" data-font="arial"></div>

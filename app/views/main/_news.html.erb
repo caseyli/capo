@@ -1,0 +1,24 @@
+<h2>News & Updates</h2>
+
+<ul class='home-news'>
+<% @posts.each do |post| %>
+	<li>
+		<span class='news-item'>
+			<%= post.body %>
+		</span><br/>
+		<span class='news-date'>
+			<%= post.updated_at.strftime("%B %d, %Y") %>
+		</span>
+	</li>
+<% end %>
+</ul>
+
+<%= form_for @post, :url => { :controller => "posts", :action => "create_site_news" } do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+  	<div class="field">
+   		<%= f.text_area :body, :class => "post", :placeholder => "Post News" %>		
+    </div>
+	<div class="actions">
+    	<%= f.submit "Publish News" %>
+  	</div>
+<% end %>

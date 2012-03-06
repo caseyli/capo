@@ -23,7 +23,7 @@ header
 }
 
 .header-container {
-	width: 700px;
+	width: 1000px;
 	margin:0 auto;
 }
 
@@ -54,7 +54,7 @@ a:hover {
 }
 
 .container {
-	width: 700px;
+	width: 1000px;
 	margin:0 auto;
 }
 
@@ -108,6 +108,44 @@ a:hover {
 	
 	box-shadow: 10px 10px 5px #222;
 	color: #222222;
+}
+
+/* Home Table */
+.home-table tr td.news-column {
+	width: 300px;
+	padding: 10px;
+	vertical-align: top;
+	border-left: 1px solid;
+	border-color: white;
+}
+
+ul.home-news {
+	margin-left:0px;
+	padding-left: 0px;
+}
+
+ul.home-news li .news-item {
+	font-weight:bold;
+	padding: 0px;
+	margin: 0px;
+}
+
+ul.home-news li .news-date {
+	font-style: italic;
+}
+
+ul.home-news li {
+	padding: 5px;
+	list-style-type: none;
+	margin-left: 0px;
+}
+
+ul.home-news li:nth-child(odd) {
+	background-color: #BBBBBB;
+}
+
+ul.home-news li:nth-child(even) {
+	background-color: #EEEEEE;
 }
 
 
@@ -369,6 +407,10 @@ ul.open-mic-list li a:hover {
 	color: white;
 }
 
+ul.attendees-list {
+	padding: 5px;
+}
+
 ul.attendees-list li {
 	list-style-type: none;
 	display:block;
@@ -441,7 +483,7 @@ table.weektable tr td.leftcol {
 	border-left-style: solid;
 	vertical-align: top;
 	padding: 0 0 0 10px;
-	width: 200px;
+	width: 250px;
 }
 
 /* Address Table */

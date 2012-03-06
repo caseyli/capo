@@ -24,6 +24,8 @@ Capo::Application.routes.draw do
   resources :sessions,            :only => [:new, :create, :destroy]
   resources :posts
   
+  post "posts/create_site_news"
+  
   root :to => 'main#home'
 
   match '/signin', :to => 'sessions#new'
