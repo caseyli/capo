@@ -37,7 +37,7 @@ class OpenMicsController < ApplicationController
     @selectable_cities_with_prov_state = cities_with_prov_state
     @selected_city_prov_state = params[:filter_city_prov_state]
     
-    if @selected_city_prov_state.nil? || @selected_city_prov_state.blank?
+    if @selected_city_prov_state.blank?
       if admin?
         @open_mics = OpenMic.all
       else
