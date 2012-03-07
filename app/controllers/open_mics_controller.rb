@@ -37,7 +37,7 @@ class OpenMicsController < ApplicationController
     @selectable_cities_with_prov_state = cities_with_prov_state
     @open_mics = OpenMic.scoped
     @open_mics = @open_mics.published unless admin?
-    @open_mics = @open_mics.where(:city => @city, :prov_state => @prov_state) if params[:filter_city_prov_state].present?
+    @open_mics = @open_mics.where(:city => @city, :prov_state => @prov_state) if @selected_city_prov_state.present?
     
     respond_to do |format|
       format.html
@@ -150,8 +150,9 @@ class OpenMicsController < ApplicationController
     end
     
     def split_city_and_prov_state
-      @city = params[:filter_city_prov_state].split(',').first unless params[:filter_city_prov_state].blank?
-      @prov_state = params[:filter_city_prov_state].split(',').last.strip unless params[:filter_city_prov_state].blank?
+      @selected_city_prov_state = params[:filter_city_prov_state]
+      @city = params[:filter_city_prov_state].split(',').first unless @selected_city_prov_state.blank?
+      @prov_state = params[:filter_city_prov_state].split(',').last.strip unless @selected_city_prov_state.blank?
     end
   
     def gmaps_address(open_mic)
