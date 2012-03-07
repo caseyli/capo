@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  respond_to :html, :json  
   before_filter :authenticate, :except => [:new, :create, :show]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:index, :destroy]
@@ -20,16 +20,8 @@ class UsersController < ApplicationController
   end
   
   def show_me
-    if signed_in?
-      @user = current_user
-      respond_to do |format|
-        format.json { render :json => @user.to_json }
-      end
-    else
-      respond_to do |format|
-        format.json { render :json => nil.to_json }
-      end
-    end
+    @user = current_user
+    respond_with @user
   end
   
   def create
