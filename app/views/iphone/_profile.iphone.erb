@@ -39,7 +39,7 @@
 	 */
 	function updateProfile(user_id) {
 		$.ajax({
-			url: '/users/9' /*+ user_id*/,
+			url: '/users/' + user_id,
 			dataType: 'json',
 			type: 'PUT',
 			data: { id: user_id, user : { 
