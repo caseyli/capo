@@ -2,6 +2,7 @@ class OpenMicsController < ApplicationController
   
   before_filter :deny_access_for_non_admins, :only => [:edit, :destroy, :add_host, :remove_host]
   before_filter :authenticate              , :only => [:attend, :unattend]
+  before_filter :split_city_and_prov_state , :only => [:index]
   
   def new
     @open_mic = OpenMic.new
@@ -33,26 +34,11 @@ class OpenMicsController < ApplicationController
   end
   
   def index
-    @open_mics = OpenMic.published.all
     @selectable_cities_with_prov_state = cities_with_prov_state
-    @selected_city_prov_state = params[:filter_city_prov_state]
+    @open_mics = OpenMic.scoped
+    @open_mics = @open_mics.published unless admin?
+    @open_mics = @open_mics.where(:city => @city, :prov_state => @prov_state) if params[:filter_city_prov_state].present?
     
-    if @selected_city_prov_state.blank?
-      if admin?
-        @open_mics = OpenMic.all
-      else
-        @open_mics = OpenMic.published.all
-      end
-    else
-      city = @selected_city_prov_state.split(',').first
-      prov_state = @selected_city_prov_state.split(',').last.strip
-      if admin?
-        @open_mics = OpenMic.where(:city => city, :prov_state => prov_state)
-      else
-        @open_mics = OpenMic.published.where(:city =>city, :prov_state => prov_state)
-      end      
-    end
-
     respond_to do |format|
       format.html
       format.json { render :json => @open_mics }
@@ -161,6 +147,11 @@ class OpenMicsController < ApplicationController
   
     def cities_with_prov_state
       OpenMic.unscoped.select("DISTINCT CITY, PROV_STATE").collect { |x| "#{x.city}, #{x.prov_state}" }
+    end
+    
+    def split_city_and_prov_state
+      @city = params[:filter_city_prov_state].split(',').first unless params[:filter_city_prov_state].blank?
+      @prov_state = params[:filter_city_prov_state].split(',').last.strip unless params[:filter_city_prov_state].blank?
     end
   
     def gmaps_address(open_mic)
