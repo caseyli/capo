@@ -51,10 +51,10 @@ class OpenMic < ActiveRecord::Base
   end
   
   def address_blank?
-    (street_1.nil? || street_1.strip == "") &&
-    (street_2.nil? || street_2.strip == "") &&
-    (city.nil? || city.strip == "") &&
-    (prov_state.nil? || prov_state.strip == "")    
+    street_1.blank? &&
+    street_2.blank? &&
+    city.blank? &&
+    prov_state.blank?    
   end
   
 end
