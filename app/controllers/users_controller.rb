@@ -54,42 +54,15 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated."
       respond_to do |format|
         format.html { redirect_to @user }
+        format.json { render :json => '{ "response" : "true"}' }
       end
     else
       @title = "Edit user"
+      first_error = @user.errors.any? ? @user.errors.full_messages.first : "Unknown Error"
       respond_to do |format|
         format.html { render 'edit' }
+        format.json { render :json => '{ "response" : "false", "message" : "' + first_error + '" }' }
       end
-    end
-  end
-  
-  # This is separated from update because of issues with the before_filter and the respond_to conflicting
-  def ajax_update
-    if request.post?
-      @user = User.find(params[:id])
-      
-      if current_user?(@user)
-        if @user.update_attributes(params[:user])
-          flash[:success] = "Profile updated."
-          respond_to do |format|
-            format.json { render :json => '{ "response" : "true"}' }
-          end
-        else
-          @title = "Edit user"
-          first_error = "Unknown Error."
-          if @user.errors.any?
-            first_error = @user.errors.full_messages.first
-          end
-          respond_to do |format|
-            format.json { render :json => '{ "response" : "false", "message" : "' + first_error + '" }' }
-          end
-        end
-      else
-        respond_to do |format|
-          format.json { render :json => '{ "response" : "false", "message" : "You are not authorized to edit this account." }' }
-        end
-      end
-      
     end
   end
   
@@ -108,14 +81,11 @@ class UsersController < ApplicationController
   
     def correct_user
       @user = User.find(params[:id])
-      respond_to do |format|
-        format.html { redirect_to(root_path) unless current_user?(@user) }
-      end
+      redirect_to(root_path) unless current_user?(@user)
     end
     
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end
-    
 
 end
