@@ -42,13 +42,8 @@ class SessionsController < ApplicationController
   end
   
   def signed_in
-    if signed_in?
-      response = '{ "response" : "true" }'
-    else
-      response = '{ "response" : "false" }'
-    end
     respond_to do |format|
-      format.json { render :json => response }
+      format.json { render :json => {:response => signed_in?}.to_json }
     end
   end
     

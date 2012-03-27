@@ -112,7 +112,7 @@
 					dataType : "json",
 					success : function(data, textStatus, jqXHR) {
 						var ihtml = "";
-						if (data.response == "true") {
+						if (data.response) {
 							
 							$.ajax({
 								url : "/open_mics/attending_info",
