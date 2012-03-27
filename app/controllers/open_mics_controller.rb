@@ -83,19 +83,19 @@ class OpenMicsController < ApplicationController
   end
   
   def attend
-    if signed_in?
-      @open_mic = OpenMic.find(params[:id])
-      
-      # Check if user was already added
-      if @open_mic.users.include?(current_user)
-        success = false
-        error_message = "You are already attending this open mic."
-        flash[:error] = error_message
-      else
-        success = true
-        @open_mic.add_attendee(current_user)  
-      end
+
+    @open_mic = OpenMic.find(params[:id])
+    
+    # Check if user was already added
+    if @open_mic.users.include?(current_user)
+      success = false
+      error_message = "You are already attending this open mic."
+      flash[:error] = error_message
+    else
+      success = true
+      @open_mic.add_attendee(current_user)  
     end
+
     
     if success
       response = {:response => success, :attendee_count => @open_mic.users.size}
@@ -109,14 +109,12 @@ class OpenMicsController < ApplicationController
   end
   
   def unattend
-    if signed_in?
-      @open_mic = OpenMic.find(params[:id])
-      @open_mic.remove_attendee(current_user)
-      
-      respond_to do |format|
-        format.html { redirect_to @open_mic}
-        format.json { render :json => { :response => true, :attendee_count => @open_mic.users.size }.to_json }
-      end
+    @open_mic = OpenMic.find(params[:id])
+    @open_mic.remove_attendee(current_user)
+    
+    respond_to do |format|
+      format.html { redirect_to @open_mic}
+      format.json { render :json => { :response => true, :attendee_count => @open_mic.users.size }.to_json }
     end
   end
   
