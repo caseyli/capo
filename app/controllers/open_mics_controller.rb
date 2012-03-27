@@ -123,9 +123,9 @@ class OpenMicsController < ApplicationController
   def attending_info
     @open_mic = OpenMic.find(params[:id])
     count = @open_mic.users.size
-    attending = @open_mic.users.include?(current_user) ? "true" : "false"
+    attending = @open_mic.users.include?(current_user) ? true : false
     respond_to do |format|
-      format.json { render :json =>  '{ "attending" : "' + attending + '", "attendee_count" : "' + count.to_s + '" }' }
+      format.json { render :json =>  { :attending => attending, :attendee_count => count }.to_json }
     end
   end
   
