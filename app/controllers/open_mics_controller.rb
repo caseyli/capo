@@ -86,23 +86,16 @@ class OpenMicsController < ApplicationController
 
     @open_mic = OpenMic.find(params[:id])
     
-    # Check if user was already added
-    if @open_mic.users.include?(current_user)
-      success = false
+    @open_mic.add_attendee(current_user)
+
+    if @open_mic.errors.empty?
+      response = {:response => true, :attendee_count => @open_mic.users.size}
+    else
       error_message = "You are already attending this open mic."
       flash[:error] = error_message
-    else
-      success = true
-      @open_mic.add_attendee(current_user)  
+      response = {:response => false, :message => error_message}
     end
 
-    
-    if success
-      response = {:response => success, :attendee_count => @open_mic.users.size}
-    else
-      response = {:response => success, :message => error_message}
-    end
-    
     respond_with(response) do |format|
       format.html { redirect_to @open_mic }
     end

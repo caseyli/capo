@@ -27,7 +27,11 @@ class OpenMic < ActiveRecord::Base
   validates :dow, :presence => true
   
   def add_attendee(user)
-    users << user
+    if !users.include?(user)
+      users << user
+    else
+      errors.add(:users, " already contains the user.")
+    end
     update
   end
   
