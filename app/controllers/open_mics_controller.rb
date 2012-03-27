@@ -115,7 +115,7 @@ class OpenMicsController < ApplicationController
       
       respond_to do |format|
         format.html { redirect_to @open_mic}
-        format.json { render :json => '{ "response" : "true", "attendee_count" : "' + @open_mic.users.size.to_s + '" }' }
+        format.json { render :json => { :response => true, :attendee_count => @open_mic.users.size }.to_json }
       end
     end
   end
