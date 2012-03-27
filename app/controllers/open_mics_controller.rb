@@ -1,5 +1,7 @@
 class OpenMicsController < ApplicationController
   
+  respond_to :json, :html
+  
   before_filter :deny_access_for_non_admins, :only => [:edit, :destroy, :add_host, :remove_host]
   before_filter :authenticate              , :only => [:attend, :unattend]
   before_filter :split_city_and_prov_state , :only => [:index]
@@ -96,15 +98,13 @@ class OpenMicsController < ApplicationController
     end
     
     if success
-      respond_to do |format|
-        format.html { redirect_to @open_mic }
-        format.json { render :json => '{ "response" : "true", "attendee_count" : "' + @open_mic.users.size.to_s + '" }' }
-      end
+      response = {:response => success, :attendee_count => @open_mic.users.size}
     else
-      respond_to do |format|
-        format.html { redirect_to @open_mic }
-        format.json { render :json => '{ "response" : "false", "message" : "' + error_message + '" }' }
-      end
+      response = {:response => success, :message => error_message}
+    end
+    
+    respond_with(response) do |format|
+      format.html { redirect_to @open_mic }
     end
   end
   

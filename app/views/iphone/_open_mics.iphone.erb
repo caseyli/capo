@@ -225,7 +225,7 @@
 			dataType: 'json',
 			data: { id : $("#attendopenmicButton").attr("open_mic_id")},
 			success: function(data, textStatus, jqXHR) {
-				if(data.response == "true") {
+				if(data.response) {
 					alert("Thanks for attending!");	
 					$("#attendopenmicButton").html("Unattend");
 					$("#attendopenmicButton").attr("attend_type","unattend");
