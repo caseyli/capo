@@ -10,6 +10,7 @@
 	</div>
 	<ul class="rounded">
 		<li class="arrow"><a href="#" id="homeBrowseButton">Browse</a></li>
+		<li><a href="#submitopenmic" class="pop">Submit Open Mic</a></li>
 		<li><a href="#login" class="slideup">Login</a></li>
 		<li><a href="#feedback" class="pop">Feedback</a></li>
 		<li><a href="#about" class="pop">About</a></li>
@@ -34,6 +35,7 @@
 
 	<ul class="rounded">
 		<li class="arrow"><a href="#" id='browseButton'>Browse</a></li>
+		<li><a href="#submitopenmic" class="pop">Submit Open Mic</a></li>
 		<li><a href="#profile">Profile</a></li>
 		<li><a href="#" id="logoffButton">Logoff</a></li>
 		<li><a href="#feedback" class="pop">Feedback</a></li>
@@ -115,6 +117,73 @@
 		Attendee List is cleared at 5:00 AM EST every week the day after the Open Mic.
 	</div>
 </div>
+
+<!-- SUBMIT OPEN MIC -->
+<div id="submitopenmic">
+	<div class="toolbar">
+		<h1>Submit</h1>
+		<a class="button back" href="#">Cancel</a>
+	</div>
+	<div class="blockcenter">
+		<br/>
+		Fill out what you can and leave the rest blank.
+	</div>
+	<form>
+		<ul class="edit rounded">
+			<li><input type='text' name='som_name' id='som_name' placeholder='Name of Open Mic/Venue' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li class="arrow">
+	            <select id="som_dow">
+	                <option value ="0">Sunday</option>
+	                <option value ="1">Monday</option>
+	                <option value ="2">Tuesday</option>
+	                <option value ="3">Wednesday</option>
+	                <option value ="4">Thursday</option>
+	                <option value ="5">Friday</option>
+	                <option value ="6">Saturday</option>
+	            </select>
+            </li>			
+			<li><input type='text' name='som_start_time' id='som_start_time' placeholder='Start Time (e.g 10:00 or 23:00)' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='som_end_time' id='som_end_time' placeholder='End Time (e.g 09:30 or 23:15)' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='som_street_1' id='som_street_1' placeholder='Street 1' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='som_street_2' id='som_street_2' placeholder='Street 2' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='som_city' id='som_city' placeholder='City' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li class="arrow">
+	            <select id="som_prov_state">
+					<%= options_for_select(provinces_and_states) %>
+	            </select>
+            </li>	
+			<li><input type='text' name='som_postal_zip' id='som_postal_zip' placeholder='Postal/Zip Code' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			<li><input type='text' name='som_country' id='som_country' placeholder='Country' autocapitalize="on" autocorrect="off" autocomplete="off" readonly="true" value="Canada"></li>
+			<li><input type='text' name='som_url' id='som_url' placeholder='Home Page URL' autocapitalize="on" autocorrect="off" autocomplete="off"></li>
+			
+		</ul>
+		<a href="#" class='grayButton' id='submitopenmicButton'>Submit</a>
+		<br/>
+	</form>
+</div>
+
+<script type="text/javascript">
+	$("#som_prov_state").change(function(){
+		if( ($("#som_prov_state").val() == "AB") ||
+			($("#som_prov_state").val() == "BC") ||
+			($("#som_prov_state").val() == "MB") ||
+			($("#som_prov_state").val() == "NB") ||
+			($("#som_prov_state").val() == "NL") ||
+			($("#som_prov_state").val() == "NT") ||
+			($("#som_prov_state").val() == "NS") ||
+			($("#som_prov_state").val() == "NU") ||
+			($("#som_prov_state").val() == "ON") ||
+			($("#som_prov_state").val() == "QC") ||
+			($("#som_prov_state").val() == "SK") ||
+			($("#som_prov_state").val() == "PE") ||
+			($("#som_prov_state").val() == "YT")) {
+			$("#som_country").val("Canada");		
+		}
+		else {
+			$("#som_country").val("United States");
+		}
+	});
+</script>
         
 <!-- LOGIN -->
 <div id="login">
