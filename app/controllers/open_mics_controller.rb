@@ -15,10 +15,19 @@ class OpenMicsController < ApplicationController
     @open_mic = OpenMic.new(params[:open_mic])
     if @open_mic.save
       flash[:success] = "Thank you for submitting your Open Mic. Once it is approved it will show up in list!"
-      redirect_to @open_mic
+      
+      respond_to do |format|
+        format.html { redirect_to @open_mic }
+        format.json { render :json => { :response => true }.to_json }
+      end
+      
     else
       @title = "Create New Open Mic"
-      render 'new'
+      
+      respond_to do |format|
+        format.html { render 'new' }
+        format.json { render :json => { :response => false }.to_json }
+      end
     end
   end
   
