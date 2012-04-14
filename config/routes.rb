@@ -32,6 +32,7 @@ Capo::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/signup', :to => 'users#new'
   match '/feedback', :to => 'pages#feedback'
+  match '/about', :to => 'pages#about'
   
   match '/browsers/desktop', :to => 'browsers#desktop'
   match '/browsers/mobile', :to => 'browsers#mobile'
