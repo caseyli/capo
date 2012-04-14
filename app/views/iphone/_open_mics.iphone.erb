@@ -295,5 +295,42 @@
 		
 	}
 	
+	/*
+	 * submitOpenMic
+	 */
+	function submitOpenMic() {
+		$("#submitopenmicButton").html("<img src='/images/spinner.gif' width='13px' height='13px' /> Submitting...");
+		$.ajax({
+			type: "POST",
+			url: "/open_mics",
+			dataType : "json",
+			data: { open_mic : { name : $("#som_name").val(),
+			                     dow : $("#som_dow").val(),
+							     start_time : $("#som_start_time").val(), 
+							     end_time : $("#som_end_time").val(),
+							     street_1 : $("#som_street_1").val(), 
+							     street_2 : $("#som_street_2").val(), 
+							     city : $("#som_city").val(), 
+							     prov_state : $("#som_prov_state").val(),
+							     postal_zip : $("#som_postal_zip").val(),
+							     country : $("#som_country").val(),
+							     url : $("#som_url").val()  
+							   } 
+				  },
+			success : function(data, textStatus, jqXHR) {
+				if (data.response) {
+					alert("Thanks for submitting your Open Mic!");
+					$("#submitopenmicButton").html("Submit");
+				}
+				else {
+					alert(data.message);
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Error! " + jqXHR.status);
+			}
+		});
+	}
+	
 
 </script>
