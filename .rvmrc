@@ -1,3 +1,2 @@
 rvm use r192
-rvm gemset use rails305
-
+rvm gemset use capo
