@@ -53,6 +53,7 @@ class OpenMicsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render :json => @open_mics }
+      format.xml {render :xml => @open_mics }
     end
   end
   

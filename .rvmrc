@@ -1,2 +1,2 @@
-rvm use r192
+rvm use ruby-1.9.2-p290
 rvm gemset use capo
