@@ -1,9 +1,9 @@
+<%= render 'shared/error_messages', :object => f.object %>
 <div class="field">
 	<%= f.label :name, 'Name of Open Mic or Venue' %>
 	<br />
 	<%= f.text_field :name %>
 </div>
-<%= render 'shared/error_messages', :object => f.object %>
 <div class='field'>
 	<%= f.label :dow, 'Day of the Week' %>
 	<br />
@@ -54,6 +54,9 @@
 	<%= f.label :url, 'Official Home Page URL' %>
 	<br />
 	<%= f.text_field :url %>
+</div>
+<div class="field">
+	<%= recaptcha_tags %>
 </div>
 
 <script type="text/javascript">

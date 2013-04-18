@@ -11,6 +11,8 @@ gem 'will_paginate'
 
 gem 'gravatar_image_tag'
 
+gem "recaptcha", :require => "recaptcha/rails"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

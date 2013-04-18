@@ -13,7 +13,7 @@ class OpenMicsController < ApplicationController
   
   def create
     @open_mic = OpenMic.new(params[:open_mic])
-    if @open_mic.save
+    if verify_recaptcha(:model => @open_mic, :message => "Captcha entry was incorrect") && @open_mic.save
       flash[:success] = "Thank you for submitting your Open Mic. Once it is approved it will show up in list!"
       
       respond_to do |format|
