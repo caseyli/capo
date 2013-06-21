@@ -5,15 +5,20 @@ class PagesController < ApplicationController
   def feedback
     @success = false
     if !params[:email_address].blank? && !params[:message].blank?
-      FeedbackMailer.feedback_email("Capo Feedback from " + params[:email_address],
-                                  params[:email_address],
-                                  params[:message]).deliver
-      @success = true
+      if verify_recaptcha
+        FeedbackMailer.feedback_email("Capo Feedback from " + params[:email_address],
+                                    params[:email_address],
+                                    params[:message]).deliver
+        @success = true
+      else
+        @success = false
+      end
       
       respond_to do |format|
         format.html
         format.json { render :json => '{ "response" : "true" }' }
       end
+      
     else
       respond_to do |format|
         format.html

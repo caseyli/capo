@@ -9,6 +9,9 @@
 			<%= label_tag :message, "Message" %><br/>
 			<%= text_area_tag :message, nil, :cols => 95, :rows => 10 %><br/>
 		</div>
+		<div class="field">
+			<%= recaptcha_tags :display => { :theme => "clean" } %>
+		</div>
 		<div class="actions">
 			<%= submit_tag "Submit" %>
 		</div>
