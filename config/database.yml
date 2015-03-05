@@ -4,18 +4,14 @@ test:
   encoding: unicode
   database: capo_test
   pool: 5
-  username: postgres
-  password: postgres
   host: 127.0.0.1
   port: 5432
 
 development:
   adapter: postgresql
   encoding: unicode
-  database: capo
+  database: capo_development
   pool: 5
-  username: postgres
-  password: postgres
   host: 127.0.0.1
   port: 5432
   
@@ -24,7 +20,5 @@ production:
   encoding: unicode
   database: capo
   pool: 5
-  username: postgres
-  password: postgres
   host: 127.0.0.1
   port: 5432
